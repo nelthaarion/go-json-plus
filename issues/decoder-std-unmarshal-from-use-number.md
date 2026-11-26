@@ -25,7 +25,7 @@ within the method decodes a number into an empty interface as a `float64`, where
     dec.UseNumber()
     dec.Decode(&wrapped{V: new(any)}) // float64(42); encoding/json: json.Number("42")
 
-The methods which take the `Decoder` of github.com/goccy/go-json/jsontext are given it.
+The methods which take the `Decoder` of github.com/nelthaarion/go-json-plus/jsontext are given it.
 
 ## Why
 

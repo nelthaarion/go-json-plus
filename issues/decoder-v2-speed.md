@@ -34,7 +34,7 @@
 
 ## Goal
 
-`github.com/goccy/go-json/v2` decodes every payload as fast as the root package (v1), within the
+`github.com/nelthaarion/go-json-plus/v2` decodes every payload as fast as the root package (v1), within the
 noise of the measures; it doesn't have to be faster. v1 must not get slower from code shared with
 v2. Then faster than sonic, where v1 is (decided 2026-10-23: the payloads which v1 decodes slower
 than sonic are not a target of this work). Being faster than master is not the measure: master

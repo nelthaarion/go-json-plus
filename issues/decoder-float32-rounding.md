@@ -16,7 +16,7 @@ range is checked on the float64 (`internal/decoder/float.go`: `overflowsFloat32`
   encoding/json/v2 decode it.
 - `1.0000000596046447753906250000000001` becomes 1; encoding/json/v2 gives 1.0000001.
 
-The root package (v1) and `Unmarshal` of `github.com/goccy/go-json/v2` both have it. With `StringifyNumbers`, the
+The root package (v1) and `Unmarshal` of `github.com/nelthaarion/go-json-plus/v2` both have it. With `StringifyNumbers`, the
 v2 decoding parses with 32 bits and is right, so a quoted number and a plain one differ.
 
 ## Fix

@@ -1,4 +1,4 @@
-PKG := github.com/goccy/go-json
+PKG := github.com/nelthaarion/go-json-plus
 
 BIN_DIR := $(CURDIR)/bin
 PKGS := $(shell go list ./... | grep -v internal/cmd|grep -v test)
@@ -54,7 +54,7 @@ bench-check:
 bench-calibrate:
 	go run ./internal/cmd/benchcheck -calibrate -attempts 1 $(BENCH_CHECK_FLAGS)
 
-# bench-compare-jsontext prints the benchmarks of github.com/goccy/go-json/jsontext ( GoJson ) and of
+# bench-compare-jsontext prints the benchmarks of github.com/nelthaarion/go-json-plus/jsontext ( GoJson ) and of
 # encoding/json/jsontext ( StdLib ) side by side, on the data of the tests of encoding/json of Go
 # ( benchmarks/jsontext_test.go ). It needs Go 1.27.
 .PHONY: bench-compare-jsontext

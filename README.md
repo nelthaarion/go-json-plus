@@ -1,7 +1,7 @@
 # go-json
 
-![Go](https://github.com/goccy/go-json/workflows/Go/badge.svg)
-[![GoDoc](https://godoc.org/github.com/goccy/go-json?status.svg)](https://pkg.go.dev/github.com/goccy/go-json?tab=doc)
+![Go](https://github.com/nelthaarion/go-json-plus/workflows/Go/badge.svg)
+[![GoDoc](https://godoc.org/github.com/nelthaarion/go-json-plus?status.svg)](https://pkg.go.dev/github.com/nelthaarion/go-json-plus?tab=doc)
 
 Fast JSON encoder/decoder compatible with encoding/json for Go
 
@@ -9,9 +9,9 @@ Fast JSON encoder/decoder compatible with encoding/json for Go
 
 # Features
 
-- Drop-in replacement of `encoding/json`. Values are decoded, and their errors are reported, as `encoding/json` of Go 1.27 (built on `encoding/json/v2`) does, on every Go version. Only the syntax errors of decoding and the reading of a stream token by token (`Token`, `More`, `InputOffset`, and `Decode` between calls of `Token`) follow the `encoding/json` the program is built with. Values are encoded as the `encoding/json` the program is built with encodes them, except for some behaviors of Go 1.27 that apply on every version, such as the limit of 10000 nested levels, map keys of pointer types, and the syntax errors of `MarshalJSON` output, `Compact` and `Indent`. The `MarshalJSONTo` and `UnmarshalJSONFrom` methods are called before `MarshalJSON` and `UnmarshalJSON`, as `encoding/json` of Go 1.27 calls them: the ones which take the `Encoder` and the `Decoder` of `github.com/goccy/go-json/jsontext` first, on every Go version, and the ones which take those of `encoding/json/jsontext` where the program is built with Go 1.27. As `encoding/json` does, they are given an encoder and a decoder with the options of `encoding/json` (`DefaultOptionsV1`), and the decoder with the ones of `DisallowUnknownFields` and `UseNumber` of a `Decoder`, so that `MarshalEncode` and `UnmarshalDecode` within the methods encode and decode as this package does; `UseNumber` is given only to the methods of `github.com/goccy/go-json/jsontext`, as `encoding/json` exports no option of it.
-- Drop-in replacement of `encoding/json/v2` and `encoding/json/jsontext` by `github.com/goccy/go-json/v2` and `github.com/goccy/go-json/jsontext`, with the API and behavior of those packages of Go 1.27 on Go 1.23 and later, with no need of `GOEXPERIMENT=jsonv2`. Their types are their own, not aliases of the ones of the standard library: replace both imports together, and declare `MarshalJSONTo` and `UnmarshalJSONFrom` methods with the `Encoder` and `Decoder` of `github.com/goccy/go-json/jsontext`, since methods taking the ones of `encoding/json/jsontext` are not called.
-- Fast ( See [Benchmark section](https://github.com/goccy/go-json#benchmarks) )
+- Drop-in replacement of `encoding/json`. Values are decoded, and their errors are reported, as `encoding/json` of Go 1.27 (built on `encoding/json/v2`) does, on every Go version. Only the syntax errors of decoding and the reading of a stream token by token (`Token`, `More`, `InputOffset`, and `Decode` between calls of `Token`) follow the `encoding/json` the program is built with. Values are encoded as the `encoding/json` the program is built with encodes them, except for some behaviors of Go 1.27 that apply on every version, such as the limit of 10000 nested levels, map keys of pointer types, and the syntax errors of `MarshalJSON` output, `Compact` and `Indent`. The `MarshalJSONTo` and `UnmarshalJSONFrom` methods are called before `MarshalJSON` and `UnmarshalJSON`, as `encoding/json` of Go 1.27 calls them: the ones which take the `Encoder` and the `Decoder` of `github.com/nelthaarion/go-json-plus/jsontext` first, on every Go version, and the ones which take those of `encoding/json/jsontext` where the program is built with Go 1.27. As `encoding/json` does, they are given an encoder and a decoder with the options of `encoding/json` (`DefaultOptionsV1`), and the decoder with the ones of `DisallowUnknownFields` and `UseNumber` of a `Decoder`, so that `MarshalEncode` and `UnmarshalDecode` within the methods encode and decode as this package does; `UseNumber` is given only to the methods of `github.com/nelthaarion/go-json-plus/jsontext`, as `encoding/json` exports no option of it.
+- Drop-in replacement of `encoding/json/v2` and `encoding/json/jsontext` by `github.com/nelthaarion/go-json-plus/v2` and `github.com/nelthaarion/go-json-plus/jsontext`, with the API and behavior of those packages of Go 1.27 on Go 1.23 and later, with no need of `GOEXPERIMENT=jsonv2`. Their types are their own, not aliases of the ones of the standard library: replace both imports together, and declare `MarshalJSONTo` and `UnmarshalJSONFrom` methods with the `Encoder` and `Decoder` of `github.com/nelthaarion/go-json-plus/jsontext`, since methods taking the ones of `encoding/json/jsontext` are not called.
+- Fast ( See [Benchmark section](https://github.com/nelthaarion/go-json-plus#benchmarks) )
 - `MarshalOf` and `UnmarshalOf`, which take the value by its type and save the allocations `Marshal` and `Unmarshal` need for an `interface{}` argument
 - Flexible customization with options
 - Coloring the encoded string
@@ -21,25 +21,25 @@ Fast JSON encoder/decoder compatible with encoding/json for Go
 # Installation
 
 ```
-go get github.com/goccy/go-json
+go get github.com/nelthaarion/go-json-plus
 ```
 
 # How to use
 
-Replace import statement from `encoding/json` to `github.com/goccy/go-json`
+Replace import statement from `encoding/json` to `github.com/nelthaarion/go-json-plus`
 
 ```
 -import "encoding/json"
-+import "github.com/goccy/go-json"
++import "github.com/nelthaarion/go-json-plus"
 ```
 
 Code which uses `encoding/json/v2` or `encoding/json/jsontext` replaces them likewise
 
 ```
 -import "encoding/json/v2"
-+import "github.com/goccy/go-json/v2"
++import "github.com/nelthaarion/go-json-plus/v2"
 -import "encoding/json/jsontext"
-+import "github.com/goccy/go-json/jsontext"
++import "github.com/nelthaarion/go-json-plus/jsontext"
 ```
 
 # JSON library comparison
@@ -98,8 +98,8 @@ $ make bench-compare-decode
 
 # Fuzzing
 
-[go-json-fuzz](https://github.com/goccy/go-json-fuzz) is the repository for fuzzing tests.
-If you run the test in this repository and find a bug, please commit to corpus to go-json-fuzz and report the issue to [go-json](https://github.com/goccy/go-json/issues).
+[go-json-fuzz](https://github.com/nelthaarion/go-json-plus-fuzz) is the repository for fuzzing tests.
+If you run the test in this repository and find a bug, please commit to corpus to go-json-fuzz and report the issue to [go-json](https://github.com/nelthaarion/go-json-plus/issues).
 
 # How it works
 
@@ -356,7 +356,7 @@ However, this is slow: as a result of profiling, `runtime.mapaccess2` accounted 
 
 An earlier version used a slice which had an element for every address a type of the program can be at, found by `typelinks` of the `runtime` package through `go:linkname`. It was replaced because it depended on the internals of the runtime, used memory in proportion to the size of the program, had to fall back to a map for a large program, and made the GC scan the whole slice in every cycle.
 
-If you want to know more, please refer to the implementation [here](https://github.com/goccy/go-json/blob/master/internal/runtime/type_cache.go)
+If you want to know more, please refer to the implementation [here](https://github.com/nelthaarion/go-json-plus/blob/master/internal/runtime/type_cache.go)
 
 ## Decoder
 

@@ -5,7 +5,7 @@ go 1.24
 require (
 	github.com/bytedance/sonic v1.15.4
 	github.com/francoispqt/gojay v1.2.13
-	github.com/goccy/go-json v0.0.0-00010101000000-000000000000
+	github.com/nelthaarion/go-json-plus v0.0.0-00010101000000-000000000000
 	github.com/json-iterator/go v1.1.12
 	github.com/klauspost/compress v1.18.7
 	github.com/mailru/easyjson v0.0.0-20190312143242-1de009706dbe
@@ -28,4 +28,4 @@ require (
 	golang.org/x/sys v0.22.0 // indirect
 )
 
-replace github.com/goccy/go-json => ../
+replace github.com/nelthaarion/go-json-plus => ../

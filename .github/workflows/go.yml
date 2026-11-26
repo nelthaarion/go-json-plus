@@ -253,7 +253,7 @@ jobs:
         run: ${{ matrix.run }}
 
   bench-compare-jsontext:
-    # It never fails by the result: it exists to read how github.com/goccy/go-json/jsontext compares with
+    # It never fails by the result: it exists to read how github.com/nelthaarion/go-json-plus/jsontext compares with
     # encoding/json/jsontext, which it replaces.
     name: Compare with encoding/json/jsontext
     runs-on: ubuntu-latest
