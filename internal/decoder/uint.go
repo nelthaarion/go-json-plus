@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
 )
 
 type uintDecoder struct {

@@ -7,8 +7,8 @@ import (
 	"reflect"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 // The tokens of a stream as encoding/json before Go 1.27 reads them: a comma or a colon which the grammar doesn't

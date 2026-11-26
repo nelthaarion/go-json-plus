@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // A Decoder decodes an object or an array which its buffer doesn't hold whole element by element, so that its memory

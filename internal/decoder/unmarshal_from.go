@@ -7,20 +7,20 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/options"
-	"github.com/goccy/go-json/internal/runtime"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/options"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // The UnmarshalJSONFrom methods which the decoder of v1 calls, before UnmarshalJSON: the one which takes the Decoder
-// of github.com/goccy/go-json/jsontext, which go-json replaces encoding/json/jsontext by, first, and the one which
+// of github.com/nelthaarion/go-json-plus/jsontext, which go-json replaces encoding/json/jsontext by, first, and the one which
 // takes the Decoder of encoding/json/jsontext, which encoding/json of Go 1.27 calls ( see stdUnmarshalerFromType ).
 // The value is read whole, as for UnmarshalJSON, and the method reads it from a decoder of its own. A method which
 // declines, by errors.ErrUnsupported, leaves the value to the decoder after it, as encoding/json/v2 documents it.
 // A key of a map is not decoded by the method, as encoding/json doesn't ( see compileMapKey ).
 
-// unmarshalerFromType is the interface of UnmarshalJSONFrom with the Decoder of github.com/goccy/go-json/jsontext.
+// unmarshalerFromType is the interface of UnmarshalJSONFrom with the Decoder of github.com/nelthaarion/go-json-plus/jsontext.
 var unmarshalerFromType = reflect.TypeFor[unmarshalerFrom]()
 
 type unmarshalerFrom interface {
@@ -47,7 +47,7 @@ var fromDecoders = sync.Pool{New: func() any {
 	return d
 }}
 
-// fromOptions are the options of the decoder which UnmarshalJSONFrom of github.com/goccy/go-json/jsontext reads from,
+// fromOptions are the options of the decoder which UnmarshalJSONFrom of github.com/nelthaarion/go-json-plus/jsontext reads from,
 // made of the options of the decoding: the ones of encoding/json, which DefaultOptionsV1 of the root package sets,
 // and RejectUnknownMembers and UnmarshalAnyWithRawNumber for DisallowUnknownFieldsOption and UseNumberOption, which a
 // Decoder of encoding/json adds for DisallowUnknownFields and UseNumber, as encoding/json gives its methods, by which
@@ -91,7 +91,7 @@ type unmarshalFromDecoder struct {
 
 func newUnmarshalFromDecoder(typ reflect.Type, next Decoder) *unmarshalFromDecoder {
 	// the method of encoding/json/jsontext, which implementsUnmarshalFrom found, if the type has not the one of
-	// github.com/goccy/go-json/jsontext
+	// github.com/nelthaarion/go-json-plus/jsontext
 	from := stdUnmarshalFrom
 	if typ.Implements(unmarshalerFromType) {
 		from = func(v any, value []byte, flags OptionFlags) (bool, error) {

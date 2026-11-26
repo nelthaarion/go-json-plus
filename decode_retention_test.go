@@ -11,7 +11,7 @@ import (
 	"unsafe"
 	"weak"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // The decoders keep buffers and contexts in pools between the calls. Nothing in them may refer to

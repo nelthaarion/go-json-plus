@@ -1,8 +1,8 @@
 package json
 
-import "github.com/goccy/go-json/internal/options"
+import "github.com/nelthaarion/go-json-plus/internal/options"
 
-// Options are the options of github.com/goccy/go-json/v2 and github.com/goccy/go-json/jsontext, which
+// Options are the options of github.com/nelthaarion/go-json-plus/v2 and github.com/nelthaarion/go-json-plus/jsontext, which
 // DefaultOptionsV1 and the options of the semantics of this package below, the ones of encoding/json, such as
 // FormatDurationAsNano, make, as encoding/json makes them for encoding/json/v2: each of them makes one behavior of the
 // v2 semantics the one of this package, alone or with the others, and DefaultOptionsV1 makes them all the ones of this
@@ -13,16 +13,16 @@ import "github.com/goccy/go-json/internal/options"
 //	jsonv2.Unmarshal(b, &v, json.FormatDurationAsNano(true))
 type Options = options.Options
 
-// DefaultOptionsV1 sets every option whose default differs between this package and github.com/goccy/go-json/v2 to
+// DefaultOptionsV1 sets every option whose default differs between this package and github.com/nelthaarion/go-json-plus/v2 to
 // the default of this package: AllowDuplicateNames, AllowInvalidUTF8, EscapeForHTML, EscapeForJS and
 // PreserveRawStrings of jsontext, Deterministic, FormatNilMapAsNull, FormatNilSliceAsNull and
-// MatchCaseInsensitiveNames of github.com/goccy/go-json/v2, and CallMethodsWithLegacySemantics,
+// MatchCaseInsensitiveNames of github.com/nelthaarion/go-json-plus/v2, and CallMethodsWithLegacySemantics,
 // FormatByteArrayAsArray, FormatBytesWithLegacySemantics, FormatDurationAsNano, MatchCaseSensitiveDelimiter,
 // MergeWithLegacySemantics, OmitEmptyWithLegacySemantics, ParseBytesWithLooseRFC4648, ParseTimeWithLooseRFC3339,
 // ReportErrorsWithLegacySemantics, StringifyWithLegacySemantics and UnmarshalArrayFromAnyLength of this package,
 // all true. Other options are not set.
 //
-// Marshal and Unmarshal of github.com/goccy/go-json/v2 with it marshal and unmarshal as Marshal and Unmarshal of
+// Marshal and Unmarshal of github.com/nelthaarion/go-json-plus/v2 with it marshal and unmarshal as Marshal and Unmarshal of
 // encoding/json of Go 1.27 do.
 func DefaultOptionsV1() Options {
 	return defaultOptionsV1
@@ -74,7 +74,7 @@ func FormatBytesWithLegacySemantics(v bool) Options {
 func FormatDurationAsNano(v bool) Options { return options.BoolOf(options.FormatDurationAsNano, v) }
 
 // MatchCaseSensitiveDelimiter specifies that the names which are matched case-insensitively, by
-// MatchCaseInsensitiveNames of github.com/goccy/go-json/v2 or the case:ignore option of a field, are matched by
+// MatchCaseInsensitiveNames of github.com/nelthaarion/go-json-plus/v2 or the case:ignore option of a field, are matched by
 // strings.EqualFold: an underscore or a dash is not ignored.
 //
 // This affects marshaling and unmarshaling. It is true by default in this package.
@@ -126,13 +126,13 @@ func ParseTimeWithLooseRFC3339(v bool) Options {
 //
 //   - The errors are usually of the types of this package, such as SyntaxError, MarshalerError, UnsupportedTypeError,
 //     UnsupportedValueError, InvalidUnmarshalError and UnmarshalTypeError, rather than SemanticError of
-//     github.com/goccy/go-json/v2 and SyntacticError of github.com/goccy/go-json/jsontext.
+//     github.com/nelthaarion/go-json-plus/v2 and SyntacticError of github.com/nelthaarion/go-json-plus/jsontext.
 //   - The error of a method of marshaling is wrapped in a MarshalerError, and the one of a method of unmarshaling
 //     is returned as it is.
 //   - A struct type with an error, such as two fields of the same name or a wrong tag, is handled as well as it
 //     can be, rather than as an error.
 //   - A name which matches no field exactly and more than one field case-insensitively, by
-//     MatchCaseInsensitiveNames of github.com/goccy/go-json/v2 or the case:ignore option of a field, is read into
+//     MatchCaseInsensitiveNames of github.com/nelthaarion/go-json-plus/v2 or the case:ignore option of a field, is read into
 //     the first of them, rather than being an error.
 //   - The whole JSON value is checked before it is unmarshaled, so that an input with a syntax error changes
 //     nothing, and an error of a value doesn't stop the unmarshaling: the first such error is reported at the

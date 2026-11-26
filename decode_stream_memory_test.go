@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // A Decoder keeps in memory what the value it decodes needs, whatever the reader.

@@ -5,8 +5,8 @@ import (
 	stdjson "encoding/json"
 	"testing"
 
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The raw value which a method or a function returns is formatted into the output, not where it is: it may be the

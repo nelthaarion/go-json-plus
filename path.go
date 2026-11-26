@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"reflect"
 
-	"github.com/goccy/go-json/internal/decoder"
+	"github.com/nelthaarion/go-json-plus/internal/decoder"
 )
 
 // CreatePath creates JSON Path.

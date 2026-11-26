@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	gojson "github.com/goccy/go-json"
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // roomReader is a strings.Reader which keeps the room of every read, len(p). It reads most bytes at most per read,

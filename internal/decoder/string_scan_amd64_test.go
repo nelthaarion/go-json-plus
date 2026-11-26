@@ -6,7 +6,7 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 func TestIndexStringSpecialAVX2(t *testing.T) {

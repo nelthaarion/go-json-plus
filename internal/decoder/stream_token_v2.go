@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
 )
 
 // The tokens of a stream as encoding/json of Go 1.27 reads them, by encoding/json/jsontext: a token or a value is

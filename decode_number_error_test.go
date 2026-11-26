@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // TestDecodeNumberSyntaxErrors decodes numbers which are not numbers by the grammar, or which another value

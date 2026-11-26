@@ -13,7 +13,7 @@ import (
 	"strings"
 	"testing"
 
-	. "github.com/goccy/go-json/jsontext"
+	. "github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // TestEncoder tests whether we can produce JSON with either tokens or raw values.

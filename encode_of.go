@@ -1,8 +1,8 @@
 package json
 
 import (
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/internal/encoder/run"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	"github.com/nelthaarion/go-json-plus/internal/encoder/run"
 )
 
 // MarshalOf returns the JSON encoding of v, as Marshal does.

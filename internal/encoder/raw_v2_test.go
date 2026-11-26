@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // rawFlags are the options of the engine of the v2 semantics: its escaping of the strings.

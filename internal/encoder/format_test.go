@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // randomFormatInput is random text of the pieces of JSON, which is valid JSON now and then.

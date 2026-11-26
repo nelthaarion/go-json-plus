@@ -13,8 +13,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The values of a sorted map whose keys are not strings are encoded in the order of the names of the keys, as
@@ -53,7 +53,9 @@ func (v failingValue) MarshalJSON() ([]byte, error) {
 
 type sortedMapTextKey int
 
-func (k sortedMapTextKey) MarshalText() ([]byte, error) { return fmt.Appendf(nil, "t%03d", int(k)), nil }
+func (k sortedMapTextKey) MarshalText() ([]byte, error) {
+	return fmt.Appendf(nil, "t%03d", int(k)), nil
+}
 
 func TestSortedMapValuesSameAsStd(t *testing.T) {
 	const n = 40

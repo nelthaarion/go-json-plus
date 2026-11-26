@@ -18,7 +18,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 // The types which the json packages give this package: the ones it can't import.

@@ -5,7 +5,7 @@ import (
 	stdjson "encoding/json"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // The inputs of Compact and Indent, and the outputs of MarshalJSON, valid and not.

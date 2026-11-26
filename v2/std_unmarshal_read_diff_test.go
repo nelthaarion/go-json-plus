@@ -13,8 +13,8 @@ import (
 	"testing"
 	"testing/iotest"
 
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The tests here compare UnmarshalRead with the one of encoding/json/v2, for the inputs of the tests of Unmarshal,

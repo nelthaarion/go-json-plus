@@ -12,7 +12,7 @@ import (
 	"testing"
 	"testing/iotest"
 
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // TestWriteValueInAvailableBuffer writes values twice which are built in the AvailableBuffer of the encoder, as

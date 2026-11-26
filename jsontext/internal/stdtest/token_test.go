@@ -12,7 +12,7 @@ import (
 	"strings"
 	"testing"
 
-	. "github.com/goccy/go-json/jsontext"
+	. "github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 func TestTokenStringAllocations(t *testing.T) {

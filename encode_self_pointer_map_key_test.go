@@ -4,7 +4,7 @@ import (
 	stdjson "encoding/json"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // selfPointerTextKey names a key by MarshalText, and holds a pointer to itself at the address of the struct.

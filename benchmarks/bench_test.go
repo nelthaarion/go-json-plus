@@ -21,8 +21,8 @@ import (
 
 	stdjson "encoding/json"
 
-	"github.com/goccy/go-json"
 	jsoniter "github.com/json-iterator/go"
+	"github.com/nelthaarion/go-json-plus"
 	segmentiojson "github.com/segmentio/encoding/json"
 	"github.com/wI2L/jettison"
 )

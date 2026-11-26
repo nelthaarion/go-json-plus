@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // randomJSON returns a random JSON value of objects, arrays and scalars nested up to depth, whose objects may

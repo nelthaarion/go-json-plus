@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // TestEncodeNumberGrammar marshals json.Number values, valid and not, as a value, in fields with and without the

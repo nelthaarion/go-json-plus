@@ -7,7 +7,7 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 // The raw value which a method or a function of the v2 semantics returns is formatted as the options want it,

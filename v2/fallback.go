@@ -6,9 +6,9 @@ import (
 	"reflect"
 	"slices"
 
-	"github.com/goccy/go-json/internal/encoder"
-	ierrors "github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	ierrors "github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 var (

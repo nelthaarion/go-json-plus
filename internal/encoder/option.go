@@ -5,7 +5,7 @@ import (
 	"io"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 type OptionFlag uint32

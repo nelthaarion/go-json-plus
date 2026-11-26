@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/bytedance/sonic"
-	gojson "github.com/goccy/go-json"
+	gojson "github.com/nelthaarion/go-json-plus"
 )
 
 // The decode benchmarks of go-json beside sonic, on the payloads of the other decode benchmarks and on

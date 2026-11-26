@@ -3,7 +3,7 @@ package jsonstring
 import (
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 // The scan of a string for a byte to escape by AVX2, 32 bytes at a time.

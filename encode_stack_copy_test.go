@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // The stack of a goroutine is copied when it grows, and only the pointers are updated.

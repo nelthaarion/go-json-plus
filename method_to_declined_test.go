@@ -5,8 +5,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/goccy/go-json"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // The values whose MarshalJSONTo declines, which are written by the representation after the method, and the
@@ -29,13 +29,15 @@ func (v toList) MarshalJSONTo(enc *jsontext.Encoder) error {
 type toPtrJSON struct{ X int }
 
 func (toPtrJSON) MarshalJSONTo(*jsontext.Encoder) error { return errors.ErrUnsupported }
-func (*toPtrJSON) MarshalJSON() ([]byte, error)          { return []byte(`"pointer json"`), nil }
+func (*toPtrJSON) MarshalJSON() ([]byte, error)         { return []byte(`"pointer json"`), nil }
 
 // toMixed has MarshalJSON and its pointer MarshalJSONTo, which comes first for an addressable value.
 type toMixed struct{}
 
-func (toMixed) MarshalJSON() ([]byte, error)                { return []byte(`"json"`), nil }
-func (*toMixed) MarshalJSONTo(enc *jsontext.Encoder) error { return enc.WriteToken(jsontext.String("to")) }
+func (toMixed) MarshalJSON() ([]byte, error) { return []byte(`"json"`), nil }
+func (*toMixed) MarshalJSONTo(enc *jsontext.Encoder) error {
+	return enc.WriteToken(jsontext.String("to"))
+}
 
 // toChan and toComplex decline, and have no representation after the method.
 type (
@@ -88,7 +90,9 @@ func TestEncodeMarshalJSONToDeclined(t *testing.T) {
 		}
 	}
 	// a field of an interface type with MarshalJSONTo is written by its dynamic value
-	if got, err := json.Marshal(struct{ F interface{ MarshalJSONTo(*jsontext.Encoder) error } }{toValue{1}}); err != nil || string(got) != `{"F":{"to":1}}` {
+	if got, err := json.Marshal(struct {
+		F interface{ MarshalJSONTo(*jsontext.Encoder) error }
+	}{toValue{1}}); err != nil || string(got) != `{"F":{"to":1}}` {
 		t.Errorf("a field of an interface type: got %s, %v", got, err)
 	}
 }

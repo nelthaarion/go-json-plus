@@ -9,9 +9,9 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/floatfmt"
-	"github.com/goccy/go-json/internal/jsonnum"
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/floatfmt"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 // The scanners of the text of a token take the text from its first byte, and return the number of bytes which

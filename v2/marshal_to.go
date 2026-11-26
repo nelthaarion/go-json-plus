@@ -6,11 +6,11 @@ import (
 	"reflect"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/encoder"
-	ierrors "github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/options"
-	"github.com/goccy/go-json/internal/textcoder"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	ierrors "github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/options"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // A MarshalJSONTo method and a function of MarshalToFunc write to a jsontext.Encoder, which the encoder gives

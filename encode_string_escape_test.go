@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // randomTextString returns a random string of valid UTF-8 with runs of plain bytes of every length between the

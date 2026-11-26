@@ -7,9 +7,9 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/options"
-	"github.com/goccy/go-json/internal/runtime"
-	"github.com/goccy/go-json/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/internal/options"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
 )
 
 // The functions of unmarshaling of WithUnmarshalers of encoding/json/v2: a value of a type which a function takes is

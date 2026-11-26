@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The tests here compare the v2 json package with encoding/json/v2, which it replaces: the same value and the same

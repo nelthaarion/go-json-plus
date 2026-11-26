@@ -3,8 +3,8 @@ package json_test
 import (
 	"testing"
 
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The options of this package and of jsontext are of one type: they may be joined, and each property is read by

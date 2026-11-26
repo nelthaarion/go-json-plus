@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 // The keys of a map for the semantics of encoding/json/v2: a key is encoded as a value is, in the place of a name,

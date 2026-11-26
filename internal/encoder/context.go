@@ -5,8 +5,8 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/jsonstring"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 type compileContext struct {

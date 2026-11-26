@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // An unordered map with keys of a string kind is written as it is read when its values are scalars, or values

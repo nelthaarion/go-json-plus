@@ -323,7 +323,7 @@ func quoteStringsDirectly(f *ast.File) {
 			return true
 		})
 	}
-	addImport(f, "github.com/goccy/go-json/internal/jsonstring")
+	addImport(f, "github.com/nelthaarion/go-json-plus/internal/jsonstring")
 }
 
 // addImport adds the import of the path to the imports of the file, which format.Source sorts, unless the file has

@@ -11,7 +11,7 @@ import (
 	"slices"
 	"testing"
 
-	. "github.com/goccy/go-json/jsontext"
+	. "github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 func FuzzCoder(f *testing.F) {

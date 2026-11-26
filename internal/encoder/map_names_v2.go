@@ -1,8 +1,8 @@
 package encoder
 
 import (
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 // The names of a map whose keys may have the same name, of the v2 semantics, which a function, a method or the

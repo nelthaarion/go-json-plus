@@ -6,7 +6,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // omitempty decides that a field is empty by the kind of its value before the marshaler is called,

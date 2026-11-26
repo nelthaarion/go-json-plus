@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	gojson "github.com/goccy/go-json"
-	json "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The tests here compare the three ways to the semantics of encoding/json: encoding/json itself, which Go 1.27 makes

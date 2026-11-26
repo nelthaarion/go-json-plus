@@ -10,7 +10,7 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/goccy/go-json/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
 )
 
 // stdMarshalerToType is the interface of MarshalJSONTo with the Encoder of encoding/json/jsontext, which encoding/json

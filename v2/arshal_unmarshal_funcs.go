@@ -4,10 +4,10 @@ import (
 	"reflect"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/decoder"
-	ierrors "github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/options"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/decoder"
+	ierrors "github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/options"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // Unmarshalers is a list of functions that may override the unmarshal behavior of specific types. Populate

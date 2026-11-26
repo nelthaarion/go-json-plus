@@ -9,8 +9,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // cyclePointer is a pointer to itself, which holds null or itself, and cycleString a struct of a field of it of the

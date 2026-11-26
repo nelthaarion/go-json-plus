@@ -10,10 +10,10 @@ import (
 	"benchmark/report"
 
 	"github.com/bytedance/sonic"
-	gojson "github.com/goccy/go-json"
-	gojsontext "github.com/goccy/go-json/jsontext"
-	gojsonv2 "github.com/goccy/go-json/v2"
 	jsoniter "github.com/json-iterator/go"
+	gojson "github.com/nelthaarion/go-json-plus"
+	gojsontext "github.com/nelthaarion/go-json-plus/jsontext"
+	gojsonv2 "github.com/nelthaarion/go-json-plus/v2"
 	segmentio "github.com/segmentio/encoding/json"
 )
 
@@ -76,19 +76,19 @@ func init() {
 		},
 		{
 			Config: report.Config{ID: "v2/go-json/v2", Library: "goccy/go-json", Category: "v2", Title: "goccy/go-json/v2",
-				Setting: "json.Marshal / json.Unmarshal of github.com/goccy/go-json/v2"},
+				Setting: "json.Marshal / json.Unmarshal of github.com/nelthaarion/go-json-plus/v2"},
 			module: goJSONModule, marshal: func(v any) ([]byte, error) { return gojsonv2.Marshal(v) },
 			unmarshal: stdUnmarshal(func(data []byte, v any) error { return gojsonv2.Unmarshal(data, v) }),
 		},
 		{
 			Config: report.Config{ID: "v2/go-json/v2/fastest", Library: "goccy/go-json", Category: "v2", Title: "goccy/go-json/v2 ( fastest )",
-				Setting: "github.com/goccy/go-json/v2 with jsontext.AllowDuplicateNames( true ), jsontext.AllowInvalidUTF8( true )"},
+				Setting: "github.com/nelthaarion/go-json-plus/v2 with jsontext.AllowDuplicateNames( true ), jsontext.AllowInvalidUTF8( true )"},
 			module: goJSONModule, marshal: func(v any) ([]byte, error) { return gojsonv2.Marshal(v, goJSONV2Fastest) },
 			unmarshal: stdUnmarshal(func(data []byte, v any) error { return gojsonv2.Unmarshal(data, v, goJSONV2Fastest) }),
 		},
 		{
 			Config: report.Config{ID: "v2/go-json/v2/of", Library: "goccy/go-json", Category: "v2", Title: "goccy/go-json/v2 ( UnmarshalOf )",
-				Setting: "json.UnmarshalOf of github.com/goccy/go-json/v2, which takes the value by its type ( decode only )"},
+				Setting: "json.UnmarshalOf of github.com/nelthaarion/go-json-plus/v2, which takes the value by its type ( decode only )"},
 			module: goJSONModule, decodeOfV2: []gojsonv2.Options{},
 		},
 		{

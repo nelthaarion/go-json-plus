@@ -9,10 +9,10 @@ import (
 	"time"
 	"unsafe"
 
-	ierrors "github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonfields"
-	"github.com/goccy/go-json/internal/jsonstring"
-	"github.com/goccy/go-json/internal/runtime"
+	ierrors "github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonfields"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 // The semantics of encoding/json/v2, which the compiler gives the opcodes of a type in the v2 mode: they are the

@@ -3,7 +3,7 @@ package json_test
 import (
 	"testing"
 
-	json "github.com/goccy/go-json/v2"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 type (

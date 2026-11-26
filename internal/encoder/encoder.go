@@ -20,11 +20,11 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/floatfmt"
-	"github.com/goccy/go-json/internal/jsonnum"
-	"github.com/goccy/go-json/internal/jsonstring"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/floatfmt"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 func (t OpType) IsMultipleOpField() bool {

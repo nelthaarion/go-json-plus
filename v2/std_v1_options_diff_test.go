@@ -17,10 +17,10 @@ import (
 	"testing"
 	"time"
 
-	gojson "github.com/goccy/go-json"
-	"github.com/goccy/go-json/internal/textcoder"
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The options of encoding/json, of the root package and of encoding/json, given to the functions of both v2

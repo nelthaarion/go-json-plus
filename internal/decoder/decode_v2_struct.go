@@ -12,10 +12,10 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonfields"
-	"github.com/goccy/go-json/internal/runtime"
-	"github.com/goccy/go-json/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonfields"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
 )
 
 // The structs and the maps of the semantics of encoding/json/v2. The members of a struct are the fields which

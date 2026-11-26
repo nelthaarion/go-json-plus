@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"time"
 
-	gojsontext "github.com/goccy/go-json/jsontext"
+	gojsontext "github.com/nelthaarion/go-json-plus/jsontext"
 )
 
-// The method of github.com/goccy/go-json/v2, which it calls instead of UnmarshalJSON. The time is written by
+// The method of github.com/nelthaarion/go-json-plus/v2, which it calls instead of UnmarshalJSON. The time is written by
 // MarshalJSON of time.Time, which it embeds: the encoders write it without the call, as they know its output, and
 // a method of its own to write it would only be slower ( see encode_marshaler_to_test.go for the methods ).
 

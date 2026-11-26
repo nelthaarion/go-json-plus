@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // The benchmarks of the lookups of the opcodes and of the decoders of the types, by the ways a program uses the

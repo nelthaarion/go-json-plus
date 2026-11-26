@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 // The shapes of the table of the recent opcodes of a context, measured against each other: the number of

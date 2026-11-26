@@ -7,9 +7,9 @@ import (
 	"slices"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonnum"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 const (

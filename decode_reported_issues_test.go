@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // The cases of the reported issues of the decoder: go-json decodes them as encoding/json of Go 1.27 does, and its

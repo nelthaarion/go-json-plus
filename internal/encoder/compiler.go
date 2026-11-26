@@ -12,8 +12,8 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 // CompileToGetCodeSet returns the opcodes of the type, compiling them if the type is new.
@@ -905,7 +905,7 @@ func (c *Compiler) listElemCode(typ reflect.Type, addressable bool) (Code, error
 		// of the `string` option by its code ( see v2Code ), which are given its address
 		return c.pointerCode(reflect.PointerTo(typ), addressable)
 	default:
-		// an element of a slice or an array is addressable ( see https://github.com/goccy/go-json/issues/370 ), but
+		// an element of a slice or an array is addressable ( see https://github.com/nelthaarion/go-json-plus/issues/370 ), but
 		// the one of an array which is not, with CallMethodsWithLegacySemantics ( see arrayCode )
 		code, err := c.typeToCodeWithPtr(typ, addressable)
 		if err != nil {

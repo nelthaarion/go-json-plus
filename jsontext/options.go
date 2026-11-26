@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/goccy/go-json/internal/options"
+	"github.com/nelthaarion/go-json-plus/internal/options"
 )
 
 // Options configures NewEncoder, Encoder.Reset, NewDecoder and Decoder.Reset, and the functions and methods
@@ -12,7 +12,7 @@ import (
 // an earlier one.
 //
 // A single Options type is used for encoding and decoding: an option which affects only one of them is ignored
-// by the other. It is the same type as the Options of github.com/goccy/go-json/v2 and of github.com/goccy/go-json.
+// by the other. It is the same type as the Options of github.com/nelthaarion/go-json-plus/v2 and of github.com/nelthaarion/go-json-plus.
 //
 //   - AllowDuplicateNames affects encoding and decoding
 //   - AllowInvalidUTF8 affects encoding and decoding

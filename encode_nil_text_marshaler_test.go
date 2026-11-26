@@ -4,7 +4,7 @@ import (
 	stdjson "encoding/json"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // A nil pointer to a TextMarshaler is null as a value, wherever the value is, and "" as the key of a map,

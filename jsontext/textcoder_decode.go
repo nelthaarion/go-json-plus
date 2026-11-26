@@ -6,8 +6,8 @@ import (
 	"io"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/options"
-	"github.com/goccy/go-json/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/internal/options"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
 )
 
 func init() {

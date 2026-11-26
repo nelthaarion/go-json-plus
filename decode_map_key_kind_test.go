@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // mapKeyKindUnmarshalJSON is an integer with a method of unmarshaling JSON, which a key of a map doesn't use.

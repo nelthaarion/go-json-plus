@@ -6,8 +6,8 @@ import (
 	"slices"
 	"unicode/utf8"
 
-	"github.com/goccy/go-json/internal/jsonnum"
-	"github.com/goccy/go-json/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
 )
 
 // Decoder is a streaming decoder of raw JSON tokens and values. It reads a stream of top-level JSON values,

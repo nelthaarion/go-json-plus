@@ -3,9 +3,9 @@ package encoder
 import (
 	"bytes"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonsyntax"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonsyntax"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // The outputs of the marshalers and the inputs of Compact and Indent are formatted in one pass ( see

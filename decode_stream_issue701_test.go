@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // A stream with a string which is not closed is not read past the line after it ( issue 701 ), nor past the record

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	gojson "github.com/goccy/go-json"
+	gojson "github.com/nelthaarion/go-json-plus"
 )
 
 // The structs of the payloads of fields without tags, with the tags of the names of their objects, which v2 matches

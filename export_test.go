@@ -1,8 +1,8 @@
 package json
 
 import (
-	"github.com/goccy/go-json/internal/decoder"
-	"github.com/goccy/go-json/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/decoder"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
 )
 
 var (

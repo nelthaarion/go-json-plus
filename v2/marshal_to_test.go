@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json/internal/textcoder"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // trackedValue writes its value by MarshalJSONTo, and records the pointer which the encoder gives it.
@@ -109,7 +109,9 @@ type (
 	layoutRaw string
 )
 
-func (k layoutKey) MarshalJSONTo(e *jsontext.Encoder) error { return e.WriteToken(jsontext.String(string(k))) }
+func (k layoutKey) MarshalJSONTo(e *jsontext.Encoder) error {
+	return e.WriteToken(jsontext.String(string(k)))
+}
 
 func (v layoutRaw) MarshalJSONTo(e *jsontext.Encoder) error { return e.WriteValue(jsontext.Value(v)) }
 

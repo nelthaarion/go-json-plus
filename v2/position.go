@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"strconv"
 
-	"github.com/goccy/go-json/internal/textcoder"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // The place of an error of marshaling is found from the output written before it, which the encoder returns with

@@ -6,7 +6,7 @@ package stdtest_test
 
 // This file holds the helpers shared by the tests ported from the tests of
 // encoding/json/jsontext. The ported tests use the public API of
-// github.com/goccy/go-json/jsontext only, so the helpers which the original
+// github.com/nelthaarion/go-json-plus/jsontext only, so the helpers which the original
 // tests took from internal packages are rebuilt here from public behavior.
 
 import (
@@ -24,7 +24,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	. "github.com/goccy/go-json/jsontext"
+	. "github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 const (

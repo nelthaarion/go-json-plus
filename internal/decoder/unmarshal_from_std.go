@@ -10,7 +10,7 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/goccy/go-json/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
 )
 
 // stdUnmarshalerFromType is the interface of UnmarshalJSONFrom with the Decoder of encoding/json/jsontext, which

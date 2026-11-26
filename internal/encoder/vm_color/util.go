@@ -6,9 +6,9 @@ import (
 	"math"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/internal/jsonstring"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 var (

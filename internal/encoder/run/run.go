@@ -6,12 +6,12 @@ import (
 	"runtime"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/internal/encoder/vm"
-	"github.com/goccy/go-json/internal/encoder/vm_color"
-	"github.com/goccy/go-json/internal/encoder/vm_color_indent"
-	"github.com/goccy/go-json/internal/encoder/vm_indent"
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	"github.com/nelthaarion/go-json-plus/internal/encoder/vm"
+	"github.com/nelthaarion/go-json-plus/internal/encoder/vm_color"
+	"github.com/nelthaarion/go-json-plus/internal/encoder/vm_color_indent"
+	"github.com/nelthaarion/go-json-plus/internal/encoder/vm_indent"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 func init() {

@@ -11,7 +11,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // This example demonstrates the use of the [Encoder] and [Decoder] to

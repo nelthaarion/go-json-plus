@@ -16,7 +16,7 @@ import (
 	"testing"
 	"time"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // go-json decodes as encoding/json of Go 1.27, which is made of encoding/json/v2, on every version of Go: the errors

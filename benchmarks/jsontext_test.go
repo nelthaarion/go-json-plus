@@ -18,12 +18,12 @@ import (
 
 	"github.com/klauspost/compress/zstd"
 
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // The benchmarks of jsontext do what the ones of encoding/json/v2 of Go do ( BenchmarkTestdata,
 // BenchmarkSlowStreamingDecode, BenchmarkTextValue and BenchmarkAppendFormat ), on the same data, with
-// github.com/goccy/go-json/jsontext ( GoJson ) and encoding/json/jsontext ( StdLib ) side by side.
+// github.com/nelthaarion/go-json-plus/jsontext ( GoJson ) and encoding/json/jsontext ( StdLib ) side by side.
 
 // jsontextData is the JSON of the tests of encoding/json, by name, read from the source of the Go which runs the
 // benchmarks, which has it compressed by zstd.

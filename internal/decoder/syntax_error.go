@@ -1,7 +1,7 @@
 package decoder
 
 import (
-	"github.com/goccy/go-json/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
 )
 
 // The syntax errors are the ones of encoding/json of the Go version, whose messages and offsets differ between Go

@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	ierrors "github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonsyntax"
-	"github.com/goccy/go-json/internal/options"
-	"github.com/goccy/go-json/jsontext"
+	ierrors "github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonsyntax"
+	"github.com/nelthaarion/go-json-plus/internal/options"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // ErrUnknownName reports that a JSON object member could not be unmarshaled because the name is not known to the

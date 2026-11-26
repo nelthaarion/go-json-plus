@@ -6,9 +6,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/internal/encoder/run"
-	ierrors "github.com/goccy/go-json/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	"github.com/nelthaarion/go-json-plus/internal/encoder/run"
+	ierrors "github.com/nelthaarion/go-json-plus/internal/errors"
 )
 
 // encodeV2 encodes v by the opcodes of the v2 semantics, with the options of flags in addition to the default ones of

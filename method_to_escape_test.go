@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/goccy/go-json"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // toString writes its string by MarshalJSONTo, and jsonString the same by MarshalJSON: their outputs are escaped

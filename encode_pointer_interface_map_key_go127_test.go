@@ -6,7 +6,7 @@ import (
 	stdjson "encoding/json"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // A key of pointers to an interface{} is named by the dynamic value at the end of its pointers and interfaces, where

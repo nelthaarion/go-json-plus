@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // The MarshalJSONTo and UnmarshalJSONFrom methods of the Encoder and the Decoder of encoding/json/jsontext, which
@@ -31,8 +31,10 @@ func (v *stdToPointer) MarshalJSONTo(enc *jsontext.Encoder) error {
 
 type stdToAndJSON struct{}
 
-func (stdToAndJSON) MarshalJSON() ([]byte, error)              { return []byte(`"json"`), nil }
-func (stdToAndJSON) MarshalJSONTo(enc *jsontext.Encoder) error { return enc.WriteToken(jsontext.String("to")) }
+func (stdToAndJSON) MarshalJSON() ([]byte, error) { return []byte(`"json"`), nil }
+func (stdToAndJSON) MarshalJSONTo(enc *jsontext.Encoder) error {
+	return enc.WriteToken(jsontext.String("to"))
+}
 
 type stdToDeclined struct {
 	A int    `json:"a"`
@@ -43,7 +45,9 @@ func (stdToDeclined) MarshalJSONTo(*jsontext.Encoder) error { return errors.ErrU
 
 type stdToHTML struct{}
 
-func (stdToHTML) MarshalJSONTo(enc *jsontext.Encoder) error { return enc.WriteToken(jsontext.String("<&>")) }
+func (stdToHTML) MarshalJSONTo(enc *jsontext.Encoder) error {
+	return enc.WriteToken(jsontext.String("<&>"))
+}
 
 type (
 	stdToFails struct{}
@@ -112,7 +116,7 @@ func (*stdFromNothing) UnmarshalJSONFrom(*jsontext.Decoder) error { return nil }
 type stdFromKey string
 
 func (k *stdFromKey) UnmarshalJSONFrom(*jsontext.Decoder) error { *k = "from"; return nil }
-func (k *stdFromKey) UnmarshalText(b []byte) error            { *k = stdFromKey("text " + string(b)); return nil }
+func (k *stdFromKey) UnmarshalText(b []byte) error              { *k = stdFromKey("text " + string(b)); return nil }
 
 type stdFromHolder struct {
 	V  stdFromValue
@@ -149,11 +153,15 @@ func TestDecodeStdUnmarshalJSONFrom(t *testing.T) {
 // stdToDelegate and stdFromDelegate are toDelegate and fromDelegate of encoding/json/v2.
 type stdToDelegate struct{ V any }
 
-func (v stdToDelegate) MarshalJSONTo(enc *jsontext.Encoder) error { return jsonv2.MarshalEncode(enc, v.V) }
+func (v stdToDelegate) MarshalJSONTo(enc *jsontext.Encoder) error {
+	return jsonv2.MarshalEncode(enc, v.V)
+}
 
 type stdFromDelegate struct{ V any }
 
-func (v *stdFromDelegate) UnmarshalJSONFrom(dec *jsontext.Decoder) error { return jsonv2.UnmarshalDecode(dec, v.V) }
+func (v *stdFromDelegate) UnmarshalJSONFrom(dec *jsontext.Decoder) error {
+	return jsonv2.UnmarshalDecode(dec, v.V)
+}
 
 func TestEncodeStdMarshalJSONToOptions(t *testing.T) {
 	for _, tt := range delegatedEncodings {

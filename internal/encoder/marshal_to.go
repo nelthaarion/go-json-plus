@@ -6,22 +6,22 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonstring"
-	"github.com/goccy/go-json/internal/options"
-	"github.com/goccy/go-json/internal/runtime"
-	"github.com/goccy/go-json/internal/textcoder"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/options"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // The MarshalJSONTo methods which the encoder of v1 calls, before MarshalJSON: the one which takes the Encoder of
-// github.com/goccy/go-json/jsontext, which go-json replaces encoding/json/jsontext by, first, and the one which takes
+// github.com/nelthaarion/go-json-plus/jsontext, which go-json replaces encoding/json/jsontext by, first, and the one which takes
 // the Encoder of encoding/json/jsontext, which encoding/json of Go 1.27 calls ( see stdMarshalerToType ). A value
 // with one is compiled as a value with MarshalJSON is, and the method writes to an encoder of its own, whose output
 // is written as the output of MarshalJSON is. A method which declines, by errors.ErrUnsupported, leaves the value
 // to the representation after it, as encoding/json/v2 documents it.
 
-// marshalerToType is the interface of MarshalJSONTo with the Encoder of github.com/goccy/go-json/jsontext.
+// marshalerToType is the interface of MarshalJSONTo with the Encoder of github.com/nelthaarion/go-json-plus/jsontext.
 var marshalerToType = reflect.TypeFor[marshalerTo]()
 
 type marshalerTo interface {
@@ -56,7 +56,7 @@ func marshalTo(m marshalerTo) ([]byte, bool, error) {
 	return bytes.Clone(bytes.TrimSuffix(e.buf.Bytes(), []byte{'\n'})), false, nil
 }
 
-// toAttachment is the encoder of jsontext which MarshalJSONTo of github.com/goccy/go-json/jsontext writes to, for a
+// toAttachment is the encoder of jsontext which MarshalJSONTo of github.com/nelthaarion/go-json-plus/jsontext writes to, for a
 // compact output, attached after the output of a context, as a value at its top level ( see appendMarshalTo ), and
 // the place where it is attached. A context has one, which it makes for its first such value.
 type toAttachment struct {
@@ -64,7 +64,7 @@ type toAttachment struct {
 	pl  textcoder.Attachment
 }
 
-// toConfig are the options of the encoders which MarshalJSONTo of github.com/goccy/go-json/jsontext writes to: the
+// toConfig are the options of the encoders which MarshalJSONTo of github.com/nelthaarion/go-json-plus/jsontext writes to: the
 // ones of encoding/json, which DefaultOptionsV1 of the root package sets, as encoding/json gives its methods, by
 // which MarshalEncode of v2 within the method encodes as the encoder of v1 does. The characters which the escapes of
 // EscapeForHTML and EscapeForJS are for are escaped after the method, as in the output of MarshalJSON, by the options
@@ -146,7 +146,7 @@ func (c *Compiler) marshalToCall(recv reflect.Type, addressable bool) *Marshaler
 		return nil
 	}
 	typ := runtime.TypePtr(recv)
-	// the method of github.com/goccy/go-json/jsontext is called by the interface value made of its table of methods,
+	// the method of github.com/nelthaarion/go-json-plus/jsontext is called by the interface value made of its table of methods,
 	// found once, and the data word, without the check of a type assertion
 	var tab *nonEmptyInterface
 	if recv.Implements(marshalerToType) {

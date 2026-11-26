@@ -6,10 +6,10 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonfields"
-	"github.com/goccy/go-json/internal/jsonstring"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonfields"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 // The embedded fallback of a struct of the v2 semantics: a field of a map of string keys or of jsontext.Value,

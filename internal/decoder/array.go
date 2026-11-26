@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
 )
 
 type arrayDecoder struct {

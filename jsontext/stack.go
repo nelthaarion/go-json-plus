@@ -5,8 +5,8 @@ import (
 	"slices"
 	"strconv"
 
-	"github.com/goccy/go-json/internal/jsonstring"
-	"github.com/goccy/go-json/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
 )
 
 // maxDepth is the deepest nesting of objects and arrays which an encoder or decoder takes.

@@ -7,7 +7,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	ierrors "github.com/goccy/go-json/internal/errors"
+	ierrors "github.com/nelthaarion/go-json-plus/internal/errors"
 )
 
 // ErrDuplicateName reports that a JSON token could not be encoded or decoded because its name is already the

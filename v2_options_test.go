@@ -3,9 +3,9 @@ package json_test
 import (
 	"testing"
 
-	"github.com/goccy/go-json"
-	"github.com/goccy/go-json/jsontext"
-	jsonv2 "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	jsonv2 "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // v1Options are the options of the semantics of this package, by name.

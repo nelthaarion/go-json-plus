@@ -4,8 +4,8 @@ import (
 	"encoding"
 	"reflect"
 
-	"github.com/goccy/go-json/internal/jsonfields"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/jsonfields"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // Marshaler is implemented by types that can marshal themselves. It is recommended that types implement

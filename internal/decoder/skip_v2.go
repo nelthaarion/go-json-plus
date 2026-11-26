@@ -6,7 +6,7 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
 )
 
 // The values which v2 skips, as the ones of the names of no field, are skipped by the grammar of JSON as v1 skips

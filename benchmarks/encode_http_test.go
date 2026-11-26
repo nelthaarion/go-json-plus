@@ -8,11 +8,11 @@ import (
 	"runtime"
 	"testing"
 
-	gojson "github.com/goccy/go-json"
-	gojsonv2 "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	gojsonv2 "github.com/nelthaarion/go-json-plus/v2"
 )
 
-// The responses of an HTTP server: MarshalWrite of github.com/goccy/go-json/v2 writes a value to the
+// The responses of an HTTP server: MarshalWrite of github.com/nelthaarion/go-json-plus/v2 writes a value to the
 // http.ResponseWriter from the buffer of the encoder, without the copy of the result which Marshal returns, and
 // MarshalWriteOf takes the value by its type, without the copy of it to an interface value: a value is written
 // without an allocation, also by the MarshalJSONTo methods of its types.

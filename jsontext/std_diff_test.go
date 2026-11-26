@@ -15,10 +15,10 @@ import (
 	"testing"
 	"testing/iotest"
 
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
-// The tests here compare github.com/goccy/go-json/jsontext with encoding/json/jsontext, which it replaces: the
+// The tests here compare github.com/nelthaarion/go-json-plus/jsontext with encoding/json/jsontext, which it replaces: the
 // same input must give the same tokens, values, output and errors, byte for byte, at the same offsets.
 
 // stdDiffInputs are inputs which reach the paths of the scanners: white space of every kind and length, strings
@@ -1758,7 +1758,7 @@ var quotedInput = regexp.MustCompile("(invalid character) '(\\\\.|[^\\\\'])+'|(i
 
 // cutCharacter is the text of an error without the character or escape sequence which it quotes as invalid:
 // encoding/json/jsontext quotes the bytes of the input which its buffer holds, which the end of the buffer may
-// cut, as a buffer of a byte at a time does, where github.com/goccy/go-json/jsontext reads the rest first, so
+// cut, as a buffer of a byte at a time does, where github.com/nelthaarion/go-json-plus/jsontext reads the rest first, so
 // that its errors don't depend on how the input is read. The text of the error of encoding/json/jsontext is not
 // structured: it is matched as text.
 func cutCharacter(s string) string {

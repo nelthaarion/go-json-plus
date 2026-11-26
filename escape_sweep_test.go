@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	goccy "github.com/goccy/go-json"
+	goccy "github.com/nelthaarion/go-json-plus"
 )
 
 // TestEscapeSweepByteIdentity compares goccy v1 Marshal with encoding/json for strings of every

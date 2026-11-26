@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // A Decoder reads no more than the value it decodes needs: a value which is not valid fails at the read of its first

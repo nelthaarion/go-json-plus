@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonnum"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 // A value of a stream is decoded from the buffer by the decoders of a byte slice when the buffer holds it whole. An

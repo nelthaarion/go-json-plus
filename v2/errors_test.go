@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	ierrors "github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/jsontext"
+	ierrors "github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // The text of a SemanticError is made of the action, the kind of the JSON value, the JSON value, the Go type,

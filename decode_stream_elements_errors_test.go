@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // The errors of a value decoded element by element are the ones of the value read at once, whatever the size of the

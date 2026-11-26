@@ -1,7 +1,7 @@
 package decoder
 
 import (
-	"github.com/goccy/go-json/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
 )
 
 // The numbers of the input are parsed by jsonnum, in the buffer which a nul byte ends. The functions here are

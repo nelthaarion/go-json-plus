@@ -8,7 +8,7 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 const uintptrSize = 4 << (^uintptr(0) >> 63)
@@ -46,18 +46,18 @@ const (
 )
 
 type Opcode struct {
-	Op         OpType    // operation type
-	EmptyKind  EmptyKind // what makes the value of the field empty for omitempty, for the generic field opcode and the ones of a marshaler
-	ZeroKind   ZeroKind  // what makes the value of the field zero for omitzero, for the generic field opcode
-	Idx        uint32    // offset to access ptr
-	Next       *Opcode   // next opcode
-	End        *Opcode   // array/slice/struct/map end
-	KeyChunk   *[KeyChunkSize]byte // the key and the padding after it, which the VM copies as a chunk: in the
+	Op        OpType              // operation type
+	EmptyKind EmptyKind           // what makes the value of the field empty for omitempty, for the generic field opcode and the ones of a marshaler
+	ZeroKind  ZeroKind            // what makes the value of the field zero for omitzero, for the generic field opcode
+	Idx       uint32              // offset to access ptr
+	Next      *Opcode             // next opcode
+	End       *Opcode             // array/slice/struct/map end
+	KeyChunk  *[KeyChunkSize]byte // the key and the padding after it, which the VM copies as a chunk: in the
 	// first cache line of the opcode, with the fields the VM reads for a struct field, while NextField, below,
 	// is only for linking the codes when they are compiled.
-	Key        string    // struct field key
-	Offset     uint32    // offset size from struct header
-	PtrNum     uint8     // pointer number: e.g. double pointer is 2.
+	Key        string // struct field key
+	Offset     uint32 // offset size from struct header
+	PtrNum     uint8  // pointer number: e.g. double pointer is 2.
 	NumBitSize uint8
 	Flags      OpFlags
 

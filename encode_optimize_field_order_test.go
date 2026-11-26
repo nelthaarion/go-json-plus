@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // OptimizeFieldOrder lets the encoder put the fields of the same kind together and a recursive field last: the

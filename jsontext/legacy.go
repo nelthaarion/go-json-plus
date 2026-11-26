@@ -3,7 +3,7 @@ package jsontext
 import (
 	"io"
 
-	"github.com/goccy/go-json/internal/jsonsyntax"
+	"github.com/nelthaarion/go-json-plus/internal/jsonsyntax"
 )
 
 func init() {

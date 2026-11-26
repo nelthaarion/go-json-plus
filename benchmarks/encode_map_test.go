@@ -10,9 +10,9 @@ import (
 	"testing"
 
 	"github.com/bytedance/sonic"
-	gojson "github.com/goccy/go-json"
-	gojsontext "github.com/goccy/go-json/jsontext"
-	gojsonv2 "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	gojsontext "github.com/nelthaarion/go-json-plus/jsontext"
+	gojsonv2 "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The benchmarks of maps under the conditions which take different paths of the encoder of maps:

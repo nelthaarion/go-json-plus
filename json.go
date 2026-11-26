@@ -5,9 +5,9 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/goccy/go-json/internal/decoder"
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/decoder"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 // Marshaler is the interface implemented by types that

@@ -7,7 +7,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // The methods of the marshalers are called directly by their code, with the data word of the interface value

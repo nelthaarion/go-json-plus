@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	gojson "github.com/goccy/go-json"
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 type maxDepthList struct{ Next *maxDepthList }

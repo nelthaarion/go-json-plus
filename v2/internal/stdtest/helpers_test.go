@@ -15,9 +15,9 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/goccy/go-json/internal/options"
-	"github.com/goccy/go-json/jsontext"
-	. "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/internal/options"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	. "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // CaseName is a test case name with the position where the case is declared.

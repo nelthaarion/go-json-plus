@@ -7,7 +7,7 @@ import (
 	"io"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/options"
+	"github.com/nelthaarion/go-json-plus/internal/options"
 )
 
 // Level is a level of the output: the top level, or an open object or array.

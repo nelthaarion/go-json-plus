@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // zeroReader gives one byte of data per read, and nothing, without an error, every other read: a reader may return

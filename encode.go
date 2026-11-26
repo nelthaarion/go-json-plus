@@ -5,8 +5,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/internal/encoder/run"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	"github.com/nelthaarion/go-json-plus/internal/encoder/run"
 )
 
 // An Encoder writes JSON values to an output stream.

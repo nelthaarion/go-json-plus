@@ -8,7 +8,7 @@ import (
 	"slices"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/floatfmt"
+	"github.com/nelthaarion/go-json-plus/internal/floatfmt"
 )
 
 // Encoder is a streaming encoder of raw JSON tokens and values. It writes a stream of top-level JSON values,

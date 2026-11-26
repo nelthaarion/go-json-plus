@@ -7,9 +7,9 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonfields"
-	"github.com/goccy/go-json/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonfields"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
 )
 
 // The values of a stream of the semantics of encoding/json/v2, which the v2 json package decodes by UnmarshalRead. A

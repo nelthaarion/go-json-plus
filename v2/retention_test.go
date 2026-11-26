@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goccy/go-json/internal/decoder"
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/internal/options"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/internal/decoder"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	"github.com/nelthaarion/go-json-plus/internal/options"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // callerName is the name of the object of the caller of MarshalEncode.

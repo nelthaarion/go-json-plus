@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // twoTopValues writes a number and an object, two values at the top level.

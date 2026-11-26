@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"strconv"
 
-	"github.com/goccy/go-json/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
 )
 
 // invalidNumberError is the error of a json.Number which is not a JSON number, as encoding/json of Go 1.27

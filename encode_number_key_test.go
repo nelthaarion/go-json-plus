@@ -5,7 +5,7 @@ import (
 	stdjson "encoding/json"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // A key of json.Number is named by its string, and a key of a pointer by the value it points to, as encoding/json

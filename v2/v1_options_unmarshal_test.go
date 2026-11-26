@@ -10,9 +10,9 @@ import (
 	"testing/iotest"
 	"time"
 
-	gojson "github.com/goccy/go-json"
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The options of encoding/json when unmarshaling, on every version of Go, with the values which encoding/json/v2 of

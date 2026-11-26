@@ -10,7 +10,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	. "github.com/goccy/go-json/jsontext"
+	. "github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 func TestPointer(t *testing.T) {

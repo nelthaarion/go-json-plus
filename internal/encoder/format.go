@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"math/bits"
 
-	"github.com/goccy/go-json/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
 )
 
 // The formatting of valid JSON in one pass, compacted or indented: the input is the JSON followed by the nul

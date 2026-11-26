@@ -17,7 +17,7 @@ import (
 	"testing"
 	"testing/iotest"
 
-	. "github.com/goccy/go-json/jsontext"
+	. "github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // equalTokens reports whether to sequences of tokens formats the same way.

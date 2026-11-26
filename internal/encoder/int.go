@@ -27,7 +27,7 @@ package encoder
 import (
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/intfmt"
+	"github.com/nelthaarion/go-json-plus/internal/intfmt"
 )
 
 func numMask(numBitSize uint8) uint64 {

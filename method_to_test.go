@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goccy/go-json"
-	"github.com/goccy/go-json/jsontext"
-	jsonv2 "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	jsonv2 "github.com/nelthaarion/go-json-plus/v2"
 )
 
-// The MarshalJSONTo and UnmarshalJSONFrom methods of the Encoder and the Decoder of github.com/goccy/go-json/jsontext,
+// The MarshalJSONTo and UnmarshalJSONFrom methods of the Encoder and the Decoder of github.com/nelthaarion/go-json-plus/jsontext,
 // which the root package calls before MarshalJSON and UnmarshalJSON, on every version of Go.
 
 type toValue struct{ N int }
@@ -31,8 +31,10 @@ func (v *toPointer) MarshalJSONTo(enc *jsontext.Encoder) error {
 // toAndJSON has both methods: MarshalJSONTo is called.
 type toAndJSON struct{}
 
-func (toAndJSON) MarshalJSON() ([]byte, error)              { return []byte(`"json"`), nil }
-func (toAndJSON) MarshalJSONTo(enc *jsontext.Encoder) error { return enc.WriteToken(jsontext.String("to")) }
+func (toAndJSON) MarshalJSON() ([]byte, error) { return []byte(`"json"`), nil }
+func (toAndJSON) MarshalJSONTo(enc *jsontext.Encoder) error {
+	return enc.WriteToken(jsontext.String("to"))
+}
 
 // toDeclinedJSON declines for MarshalJSON, toDeclined for its fields.
 type toDeclinedJSON struct{}
@@ -70,7 +72,9 @@ func (toDeclinedLate) MarshalJSONTo(enc *jsontext.Encoder) error {
 
 type toHTML struct{}
 
-func (toHTML) MarshalJSONTo(enc *jsontext.Encoder) error { return enc.WriteToken(jsontext.String("<&>")) }
+func (toHTML) MarshalJSONTo(enc *jsontext.Encoder) error {
+	return enc.WriteToken(jsontext.String("<&>"))
+}
 
 func TestEncodeMarshalJSONTo(t *testing.T) {
 	p := &toPointer{7}
@@ -155,7 +159,7 @@ func (v *fromAndJSON) UnmarshalJSONFrom(dec *jsontext.Decoder) error {
 // fromDeclinedJSON declines for UnmarshalJSON, fromDeclined for its fields.
 type fromDeclinedJSON struct{ Got string }
 
-func (v *fromDeclinedJSON) UnmarshalJSON(b []byte) error        { v.Got = "json " + string(b); return nil }
+func (v *fromDeclinedJSON) UnmarshalJSON(b []byte) error            { v.Got = "json " + string(b); return nil }
 func (*fromDeclinedJSON) UnmarshalJSONFrom(*jsontext.Decoder) error { return errors.ErrUnsupported }
 
 type fromDeclined struct {
@@ -185,7 +189,7 @@ func (*fromDeclinedLate) UnmarshalJSONFrom(dec *jsontext.Decoder) error {
 type fromKey string
 
 func (k *fromKey) UnmarshalJSONFrom(*jsontext.Decoder) error { *k = "from"; return nil }
-func (k *fromKey) UnmarshalText(b []byte) error            { *k = fromKey("text " + string(b)); return nil }
+func (k *fromKey) UnmarshalText(b []byte) error              { *k = fromKey("text " + string(b)); return nil }
 
 type fromHolder struct {
 	V  fromValue
@@ -255,7 +259,9 @@ func (v toDelegate) MarshalJSONTo(enc *jsontext.Encoder) error { return jsonv2.M
 
 type fromDelegate struct{ V any }
 
-func (v *fromDelegate) UnmarshalJSONFrom(dec *jsontext.Decoder) error { return jsonv2.UnmarshalDecode(dec, v.V) }
+func (v *fromDelegate) UnmarshalJSONFrom(dec *jsontext.Decoder) error {
+	return jsonv2.UnmarshalDecode(dec, v.V)
+}
 
 // delegatedEncodings are values which encoding/json encodes otherwise than encoding/json/v2 by default, and their
 // outputs by encoding/json.

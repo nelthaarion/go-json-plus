@@ -22,8 +22,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goccy/go-json/jsontext"
-	. "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	. "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // unmarshalTest is a case of TestUnmarshal.

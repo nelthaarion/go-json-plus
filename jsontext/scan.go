@@ -9,8 +9,8 @@ import (
 	"unicode/utf16"
 	"unicode/utf8"
 
-	"github.com/goccy/go-json/internal/jsonnum"
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 // valueScanner reads a JSON value, and writes it formatted if write is set. The levels of the value are pushed

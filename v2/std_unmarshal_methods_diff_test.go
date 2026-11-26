@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The tests here compare the decoding by the methods and the functions of unmarshaling, and of the time types, with

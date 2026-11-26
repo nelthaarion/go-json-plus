@@ -19,9 +19,9 @@ import (
 	"benchmark/report"
 
 	"github.com/bytedance/sonic"
-	gojson "github.com/goccy/go-json"
-	gojsonv2 "github.com/goccy/go-json/v2"
 	jsoniter "github.com/json-iterator/go"
+	gojson "github.com/nelthaarion/go-json-plus"
+	gojsonv2 "github.com/nelthaarion/go-json-plus/v2"
 	segmentio "github.com/segmentio/encoding/json"
 )
 
@@ -92,7 +92,7 @@ type reportConfig struct {
 	// sonic decodes from, is made once, outside of the measured loop.
 	unmarshal func(data []byte) func(v any) error
 	// decodeOf is set for go-json's UnmarshalOf, which takes the value by its type: the options it is called with,
-	// and decodeOfV2 for the one of github.com/goccy/go-json/v2.
+	// and decodeOfV2 for the one of github.com/nelthaarion/go-json-plus/v2.
 	decodeOf   []gojson.DecodeOptionFunc
 	decodeOfV2 []gojsonv2.Options
 }
@@ -146,7 +146,7 @@ func segmentioUnmarshal(flags segmentio.ParseFlags) func([]byte) func(any) error
 }
 
 const (
-	goJSONModule    = "github.com/goccy/go-json"
+	goJSONModule    = "github.com/nelthaarion/go-json-plus"
 	sonicModule     = "github.com/bytedance/sonic"
 	jsoniterModule  = "github.com/json-iterator/go"
 	segmentioModule = "github.com/segmentio/encoding"
@@ -771,7 +771,7 @@ func reportLibraries() []report.Library {
 	}
 	if sha := os.Getenv("GITHUB_SHA"); sha != "" {
 		// go-json is the one of the repository, replaced by its directory
-		versions["github.com/goccy/go-json"] = sha
+		versions["github.com/nelthaarion/go-json-plus"] = sha
 	}
 	seen := map[string]bool{}
 	var libs []report.Library

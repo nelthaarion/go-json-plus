@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/bytedance/sonic"
-	gojson "github.com/goccy/go-json"
+	gojson "github.com/nelthaarion/go-json-plus"
 )
 
 // The decode benchmarks of the responses of the GitHub API, which is one of the most used JSON APIs: the list of

@@ -8,9 +8,9 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
-	"github.com/goccy/go-json/internal/jsonsyntax"
-	"github.com/goccy/go-json/internal/textcoder"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/jsonsyntax"
+	"github.com/nelthaarion/go-json-plus/internal/textcoder"
 )
 
 // The type errors are the ones of encoding/json of Go 1.27, which is made of encoding/json/v2, on every version of

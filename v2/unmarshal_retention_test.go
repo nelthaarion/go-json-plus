@@ -10,8 +10,8 @@ import (
 	"unsafe"
 	"weak"
 
-	json "github.com/goccy/go-json/v2"
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // A decoded value refers to memory of its own only, as with encoding/json/v2: a value kept out of a call keeps alive

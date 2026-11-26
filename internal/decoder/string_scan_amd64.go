@@ -3,7 +3,7 @@ package decoder
 import (
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 // hasStringSIMD is whether indexStringSpecial scans: whether the CPU has AVX2.

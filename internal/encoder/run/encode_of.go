@@ -3,8 +3,8 @@ package run
 import (
 	"reflect"
 
-	"github.com/goccy/go-json/internal/encoder"
-	"github.com/goccy/go-json/internal/runtime"
+	"github.com/nelthaarion/go-json-plus/internal/encoder"
+	"github.com/nelthaarion/go-json-plus/internal/runtime"
 )
 
 // MaxReusedValueSize is the size of the largest value which EncodeOf, and the decoding of a value by its type,

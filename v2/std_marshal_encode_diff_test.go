@@ -9,8 +9,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // placeOfEncoder records the pointer which its MarshalJSONTo method is given.

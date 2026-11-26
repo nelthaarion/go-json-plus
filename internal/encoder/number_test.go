@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
 )
 
 // AppendNumber takes a json.Number by the grammar of the JSON numbers, which its check of the bytes by words

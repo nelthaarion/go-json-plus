@@ -9,9 +9,9 @@ import (
 	"strings"
 	"testing"
 
-	json "github.com/goccy/go-json"
-	"github.com/goccy/go-json/jsontext"
-	jsonv2 "github.com/goccy/go-json/v2"
+	json "github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	jsonv2 "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The memory which the values decoded by go-json keep alive is compared with the memory which the same values

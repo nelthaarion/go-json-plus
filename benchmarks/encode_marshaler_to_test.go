@@ -6,13 +6,13 @@ import (
 	"strconv"
 	"testing"
 
-	gojson "github.com/goccy/go-json"
-	gojsontext "github.com/goccy/go-json/jsontext"
-	gojsonv2 "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	gojsontext "github.com/nelthaarion/go-json-plus/jsontext"
+	gojsonv2 "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The methods of the types of a program, which write their values themselves: MarshalJSON, which v1 calls, and
-// MarshalJSONTo, which github.com/goccy/go-json/v2 calls instead, for the same values. MarshalJSON returns a new
+// MarshalJSONTo, which github.com/nelthaarion/go-json-plus/v2 calls instead, for the same values. MarshalJSON returns a new
 // slice, which the encoder checks and copies; MarshalJSONTo writes to the encoder, which checks what it writes.
 // The types of the *JSON names have MarshalJSON only, which v2 calls when a type has no MarshalJSONTo.
 

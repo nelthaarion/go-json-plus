@@ -8,7 +8,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/errors"
+	"github.com/nelthaarion/go-json-plus/internal/errors"
 )
 
 // The methods of unmarshaling of the semantics of encoding/json/v2, and the time types. A value is always

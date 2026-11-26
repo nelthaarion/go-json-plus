@@ -7,12 +7,12 @@ import (
 	"testing"
 	"time"
 
-	gojson "github.com/goccy/go-json"
-	gojsontext "github.com/goccy/go-json/jsontext"
-	gojsonv2 "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	gojsontext "github.com/nelthaarion/go-json-plus/jsontext"
+	gojsonv2 "github.com/nelthaarion/go-json-plus/v2"
 )
 
-// The decoding of github.com/goccy/go-json/v2, beside go-json's own of the same input.
+// The decoding of github.com/nelthaarion/go-json-plus/v2, beside go-json's own of the same input.
 
 func unmarshalV2(data []byte, v any) error { return gojsonv2.Unmarshal(data, v) }
 
@@ -179,7 +179,7 @@ func Benchmark_Decode_GitHubGraphQL_Unmarshal_GoJsonV2CaseInsensitive(b *testing
 	benchDecode[GitHubGraphQLIssues](b, githubGraphQLIssues, unmarshalV2Insensitive)
 }
 
-// v2ReadDecoder decodes the single value of its reader by UnmarshalRead of github.com/goccy/go-json/v2, with the
+// v2ReadDecoder decodes the single value of its reader by UnmarshalRead of github.com/nelthaarion/go-json-plus/v2, with the
 // options.
 type v2ReadDecoder struct {
 	r    io.Reader
@@ -233,7 +233,7 @@ func Benchmark_Decode_SkipRecords_ChunkedStream_GoJsonV2(b *testing.B) {
 }
 
 // v2DecodeDecoder decodes the values of its decoder one after another by UnmarshalDecode of
-// github.com/goccy/go-json/v2.
+// github.com/nelthaarion/go-json-plus/v2.
 type v2DecodeDecoder struct{ dec *gojsontext.Decoder }
 
 func (d *v2DecodeDecoder) Decode(v any) error { return gojsonv2.UnmarshalDecode(d.dec, v) }

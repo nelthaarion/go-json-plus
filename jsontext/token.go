@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"unicode/utf8"
 
-	"github.com/goccy/go-json/internal/intfmt"
-	"github.com/goccy/go-json/internal/jsonnum"
+	"github.com/nelthaarion/go-json-plus/internal/intfmt"
+	"github.com/nelthaarion/go-json-plus/internal/jsonnum"
 )
 
 // Kind is the kind of a JSON token.

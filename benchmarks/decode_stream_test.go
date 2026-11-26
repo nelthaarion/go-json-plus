@@ -13,7 +13,7 @@ import (
 	"testing"
 
 	"github.com/bytedance/sonic"
-	gojson "github.com/goccy/go-json"
+	gojson "github.com/nelthaarion/go-json-plus"
 )
 
 // The benchmarks of decoding from a stream ( Decoder.Decode ) read from a reader which gives the input in chunks of

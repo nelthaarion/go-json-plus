@@ -6,7 +6,7 @@ import (
 	"math/bits"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/jsonstring"
+	"github.com/nelthaarion/go-json-plus/internal/jsonstring"
 )
 
 // The output of a marshaler is compacted and validated, as encoding/json does. Most of the outputs are compact

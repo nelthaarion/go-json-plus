@@ -3,12 +3,12 @@ package json
 import (
 	"reflect"
 
-	"github.com/goccy/go-json/internal/options"
+	"github.com/nelthaarion/go-json-plus/internal/options"
 )
 
 // Options configures Marshal, MarshalWrite, MarshalEncode, Unmarshal, UnmarshalRead and UnmarshalDecode. It is
-// the same type as jsontext.Options and github.com/goccy/go-json.Options, so that the options of the jsontext
-// package and of github.com/goccy/go-json may be given to them as well, and the options of this package to
+// the same type as jsontext.Options and github.com/nelthaarion/go-json-plus.Options, so that the options of the jsontext
+// package and of github.com/nelthaarion/go-json-plus may be given to them as well, and the options of this package to
 // jsontext.NewEncoder and jsontext.NewDecoder. In a list of options, an option
 // given later overrides a property set by an earlier one.
 //

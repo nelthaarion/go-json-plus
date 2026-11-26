@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // Slice, map and array types which hold values of themselves, directly or through other slices, maps, arrays and

@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // The entries of a sorted map whose values are scalars or of interface{} are written directly by one call of the
@@ -88,7 +88,9 @@ func (v sortedMapFailingValue) MarshalJSON() ([]byte, error) {
 
 type sortedMapTextKey int
 
-func (k sortedMapTextKey) MarshalText() ([]byte, error) { return fmt.Appendf(nil, "t%03d", int(k)), nil }
+func (k sortedMapTextKey) MarshalText() ([]byte, error) {
+	return fmt.Appendf(nil, "t%03d", int(k)), nil
+}
 
 // The values of a map whose keys are not strings are encoded in the order of the keys, as encoding/json encodes
 // them: the error is the one of the first value which fails in that order. The error of the method is compared, as
@@ -192,7 +194,9 @@ func TestEncodeSortedMapTextKeyNames(t *testing.T) {
 // The keys are sorted by their names with any colors: an integer is colored within its quotes, which the codes of
 // its color don't put out of the order of its name.
 func TestEncodeSortedMapColoredKeys(t *testing.T) {
-	format := func(name string) json.ColorFormat { return json.ColorFormat{Header: "<" + name + ">", Footer: "</" + name + ">"} }
+	format := func(name string) json.ColorFormat {
+		return json.ColorFormat{Header: "<" + name + ">", Footer: "</" + name + ">"}
+	}
 	scheme := &json.ColorScheme{Int: format("i"), Uint: format("u"), String: format("s"), ObjectKey: format("k")}
 	tags := regexp.MustCompile(`</?[a-z]>`)
 	for _, v := range []any{

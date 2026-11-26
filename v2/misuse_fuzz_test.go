@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json/jsontext"
+	"github.com/nelthaarion/go-json-plus/jsontext"
 )
 
 // misuseTokens and misuseValues are what a misusing method writes: tokens and raw values, most of which don't fit

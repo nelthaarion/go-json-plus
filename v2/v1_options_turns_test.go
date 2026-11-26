@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	gojson "github.com/goccy/go-json"
-	"github.com/goccy/go-json/jsontext"
-	json "github.com/goccy/go-json/v2"
+	gojson "github.com/nelthaarion/go-json-plus"
+	"github.com/nelthaarion/go-json-plus/jsontext"
+	json "github.com/nelthaarion/go-json-plus/v2"
 )
 
 // The opcodes and the decoders which the options of encoding/json change are kept apart from the ones of other

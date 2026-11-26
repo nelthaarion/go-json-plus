@@ -10,7 +10,7 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/goccy/go-json/internal/floatfmt"
+	"github.com/nelthaarion/go-json-plus/internal/floatfmt"
 )
 
 // Value is a raw JSON value, one of:

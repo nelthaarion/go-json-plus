@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // omitzero omits a field whose value is zero, as encoding/json decides it from Go 1.24: by the IsZero method

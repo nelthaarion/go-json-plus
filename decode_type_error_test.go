@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // The type errors of the decoding are the ones of encoding/json of Go 1.27, on every version of Go: a value which is

@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"testing"
 
-	json "github.com/goccy/go-json"
+	json "github.com/nelthaarion/go-json-plus"
 )
 
 // The numbers are parsed in one pass, and a float64 is computed directly when that is exact. These tests

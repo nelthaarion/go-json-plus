@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // HTMLEscape escapes '<', '>', '&', U+2028 and U+2029 wherever they are and keeps everything else as it is, as

@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/goccy/go-json"
+	"github.com/nelthaarion/go-json-plus"
 )
 
 // The syntax errors of Compact and Indent, and of the outputs of MarshalJSON, are the ones of encoding/json of the
