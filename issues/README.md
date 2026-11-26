@@ -1,0 +1,80 @@
+# Work queue
+
+The known work on go-json, one file per item. Reports and requests of users stay on GitHub
+Issues; this directory holds what the maintainers have found and planned.
+
+## Order
+
+The decoding API of v2 is complete (2026-10-23), and the root package calls the v2 methods
+(2026-10-27). The speed of v2 against v1 comes first; the known defects and the other speed gaps
+wait until then, since none of them is urgent.
+
+Priority 1: now
+
+- [decoder-v2-speed.md](decoder-v2-speed.md): v2 decoding at parity with v1
+
+Priority 2: first after priority 1
+
+- [decoder-v2-stream-error-places.md](decoder-v2-stream-error-places.md)
+- [decoder-v2-method-ignored-error.md](decoder-v2-method-ignored-error.md)
+- [decoder-disallow-unknown-fields-order.md](decoder-disallow-unknown-fields-order.md)
+- [decoder-unexported-embedded-pointer-error.md](decoder-unexported-embedded-pointer-error.md)
+- [decoder-case-insensitive-field-choice.md](decoder-case-insensitive-field-choice.md)
+- [decoder-float32-rounding.md](decoder-float32-rounding.md)
+- [decoder-valid-long-strings.md](decoder-valid-long-strings.md)
+- [encoder-sorted-map-speed.md](encoder-sorted-map-speed.md)
+- [path-cast-by-go-field-names.md](path-cast-by-go-field-names.md)
+- [path-recursive-rest-rereads.md](path-recursive-rest-rereads.md)
+- [encoder-field-query-cache-growth.md](encoder-field-query-cache-growth.md)
+- [decoder-any-vs-sonic-optdec.md](decoder-any-vs-sonic-optdec.md)
+
+Priority 3
+
+- [decoder-decode-context-kept.md](decoder-decode-context-kept.md)
+- [decoder-map-key-errors.md](decoder-map-key-errors.md)
+- [decoder-new-decoder-allocations.md](decoder-new-decoder-allocations.md)
+- [decoder-stream-speed-amd64.md](decoder-stream-speed-amd64.md)
+- [decoder-code-unmarshal-debt.md](decoder-code-unmarshal-debt.md)
+- [decoder-tests-judged-by-time.md](decoder-tests-judged-by-time.md)
+- [decoder-v2-read-memory-method-cases.md](decoder-v2-read-memory-method-cases.md)
+- [decoder-v2-read-report-errors-whole-reader.md](decoder-v2-read-report-errors-whole-reader.md)
+- [v2-report-errors-misuse-edges.md](v2-report-errors-misuse-edges.md)
+- [decoder-v2-string-option-of-methods.md](decoder-v2-string-option-of-methods.md)
+- [decoder-std-unmarshal-from-use-number.md](decoder-std-unmarshal-from-use-number.md)
+- [encoder-v2-indent-offsets.md](encoder-v2-indent-offsets.md)
+- [encoder-map-key-types.md](encoder-map-key-types.md)
+- [encoder-small-deviations.md](encoder-small-deviations.md)
+- [encoder-quadratic-nesting.md](encoder-quadratic-nesting.md)
+- [encoder-marshalers-per-call.md](encoder-marshalers-per-call.md)
+- [encoder-report-gaps-vs-sonic.md](encoder-report-gaps-vs-sonic.md)
+- [selection-api.md](selection-api.md)
+- [selection-promoted-field-key.md](selection-promoted-field-key.md)
+- [path-small-deviations.md](path-small-deviations.md)
+
+Priority 4
+
+- [decoder-redundant-skip-white-space.md](decoder-redundant-skip-white-space.md)
+- [decoder-float-pow10-of-one.md](decoder-float-pow10-of-one.md)
+- [decoder-compile-embedded-chains.md](decoder-compile-embedded-chains.md)
+- [decoder-v2-error-before-colon.md](decoder-v2-error-before-colon.md)
+- [decoder-v2-small-deviations.md](decoder-v2-small-deviations.md)
+- [decoder-v2-position-after-function-error.md](decoder-v2-position-after-function-error.md)
+- [decoder-v2-position-after-type-error.md](decoder-v2-position-after-type-error.md)
+- [decoder-error-source-display.md](decoder-error-source-display.md)
+- [compile-concurrent-first-use.md](compile-concurrent-first-use.md)
+- [encoder-error-texts.md](encoder-error-texts.md)
+- [encoder-vm-structure.md](encoder-vm-structure.md)
+- [encoder-marshal-to-stack-depth.md](encoder-marshal-to-stack-depth.md)
+- [encoder-type-table-guards.md](encoder-type-table-guards.md)
+- [ci-benchcheck-binary-placement.md](ci-benchcheck-binary-placement.md)
+
+## Conventions
+
+- One item per file, named by what it covers (`<area>-<subject>.md`), with the fields
+  Area, Kind, Priority and Status at the top.
+- "Recorded" items were seen on master at the date given and have not been checked since;
+  reproduce them on master before fixing.
+- The pull request that resolves an item deletes its file and its line here.
+- What go-json follows: the documented behavior of Go 1.27's encoding/json and
+  encoding/json/v2 on every Go version; not error texts, undocumented states after failed or
+  misused calls, or bugs of the standard library.

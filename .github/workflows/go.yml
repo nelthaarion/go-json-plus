@@ -1,0 +1,292 @@
+name: Go
+# A change of the documents alone ( the paths-ignore below, the same for both events ) runs nothing: they affect no build, test or benchmark.
+# A push or a pull request which changes any other file runs everything.
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+      - 'benchmarks/licenses/**'
+      - '.github/FUNDING.yml'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+      - 'benchmarks/licenses/**'
+      - '.github/FUNDING.yml'
+# The jobs read the repository and nothing else: a job which needs more states it itself, as coverage does.
+permissions:
+  contents: read
+jobs:
+  build:
+    name: Build on limited environment
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v7
+    - name: build
+      run: docker compose run go-json
+
+  test:
+    name: Test
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ "ubuntu-latest", "macos-latest", "windows-latest" ]
+        # Go 1.27 is pinned to its patch release: many tests compare with the encoding/json of the Go which runs
+        # them, whose behavior a patch release may change. It is raised with the changes which follow it.
+        go-version: [ "1.25", "1.26", "1.27.3" ]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: checkout
+      uses: actions/checkout@v7
+    - name: setup Go ${{ matrix.go-version }}
+      uses: actions/setup-go@v7
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: simple test
+      run: go test -v ./... -count=1
+    - name: test with GC pressure
+      run: go test -v ./... -count=1
+      env:
+        GOGC: 1
+    - name: test with race detector
+      run: go test -v -race ./... -count=1
+
+  test-big-endian:
+    # The code which reads several bytes at once as a word must find them in the order of memory on a big-endian
+    # machine too: the tests run on linux/s390x, whose binaries QEMU runs, since no runner is big-endian.
+    name: Test on a big-endian machine (s390x)
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v7
+    - name: setup Go
+      uses: actions/setup-go@v7
+      with:
+        go-version: '1.27.3'
+    - name: setup QEMU
+      uses: docker/setup-qemu-action@v4
+      with:
+        platforms: s390x
+    - name: test
+      run: go test -v ./... -count=1
+      env:
+        GOARCH: s390x
+
+  test-32bit:
+    # A word is 4 bytes on a 32-bit machine: what the encoder keeps in the slots of its VM and the code which reads
+    # several bytes at once must work with it. The tests run on linux/386, whose binaries the runner runs natively.
+    name: Test on a 32-bit machine (386)
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v7
+    - name: setup Go
+      uses: actions/setup-go@v7
+      with:
+        go-version: '1.27.3'
+    - name: test
+      run: go test -v ./... -count=1
+      env:
+        GOARCH: '386'
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+      - name: setup Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.3'
+      - name: lint
+        run: |
+          make lint
+  bench:
+    # The benchmarks are measured by parts, one by each job, so that the check ends within a few minutes.
+    # The decode and the encode benchmarks are apart, so that each group is judged by a mean of its own:
+    # in a mean of both, a change of the decoder would count for less than one of the encoder, whose
+    # benchmarks are more. The decode ones are in four parts and the encode ones in five, each with benchmarks of
+    # every kind ( see -shard of internal/cmd/benchcheck ).
+    name: Benchmark (${{ matrix.part }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - part: decode 0/4
+            flags: -group decode -shard 0/4
+          - part: decode 1/4
+            flags: -group decode -shard 1/4
+          - part: decode 2/4
+            flags: -group decode -shard 2/4
+          - part: decode 3/4
+            flags: -group decode -shard 3/4
+          - part: encode 0/5
+            flags: -group encode -shard 0/5
+          - part: encode 1/5
+            flags: -group encode -shard 1/5
+          - part: encode 2/5
+            flags: -group encode -shard 2/5
+          - part: encode 3/5
+            flags: -group encode -shard 3/5
+          - part: encode 4/5
+            flags: -group encode -shard 4/5
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+        with:
+          # the master branch is required to measure the baseline.
+          fetch-depth: 0
+      - name: setup Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.3'
+          cache-dependency-path: |
+            go.sum
+            benchmarks/go.sum
+      # A verdict is saved only when the job succeeds, so a failed commit is measured again.
+      # The key has the attempt of the run: re-running the job measures again, on the machine it gets,
+      # because the machines of the CI differ and a single measurement is not conclusive.
+      # The baseline is always measured in the same job because it is never shared between machines.
+      - name: restore benchmark verdict
+        uses: actions/cache@v6
+        with:
+          path: .git/benchcheck/verdict
+          key: benchcheck-verdict-${{ github.sha }}-${{ github.run_attempt }}-${{ matrix.part }}
+      - name: check performance degradation
+        run: make bench-check BENCH_CHECK_FLAGS="-base origin/master ${{ matrix.flags }}"
+
+  bench-last-commit:
+    # It never fails by the result: it measures what the last commit of a pull request changed, by parts.
+    if: github.event_name == 'pull_request'
+    name: Measure the last commit (${{ matrix.part }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - part: decode 0/4
+            flags: -group decode -shard 0/4
+          - part: decode 1/4
+            flags: -group decode -shard 1/4
+          - part: decode 2/4
+            flags: -group decode -shard 2/4
+          - part: decode 3/4
+            flags: -group decode -shard 3/4
+          - part: encode 0/5
+            flags: -group encode -shard 0/5
+          - part: encode 1/5
+            flags: -group encode -shard 1/5
+          - part: encode 2/5
+            flags: -group encode -shard 2/5
+          - part: encode 3/5
+            flags: -group encode -shard 3/5
+          - part: encode 4/5
+            flags: -group encode -shard 4/5
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+        with:
+          # the previous commit is required to measure what the last commit changed.
+          fetch-depth: 0
+      - name: setup Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.3'
+          cache-dependency-path: |
+            go.sum
+            benchmarks/go.sum
+      # The machines of the CI differ, so a commit is compared with its parent on the same machine.
+      # HEAD is the merge commit of the pull request, whose second parent is the head of the branch.
+      - name: measure what the last commit changed
+        run: make bench-check BENCH_CHECK_FLAGS="-base HEAD^2~1 -no-cache -bench 'Encode_|Marshal|Twitter|Decode|Unmarshal' ${{ matrix.flags }}" || true
+
+  bench-compare:
+    # It never fails by the result: it exists to read how go-json compares with sonic on amd64,
+    # where sonic compiles the encoder of a type to machine code. Each task is a job of its own.
+    name: Compare with sonic (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: encode
+            run: make bench-compare-encode
+          # sonic inlines the nested structs into the code of a type up to 3 levels by default.
+          # It is also measured with more levels, so that it is compared in the way which is the best for it.
+          - name: encode, sonic inlining more
+            run: SONIC_MAX_INLINE_DEPTH=10 make bench-compare-encode
+          - name: decode
+            run: make bench-compare-decode && make bench-profile-decode
+          # sonic has two decoders on amd64, which the environment chooses: the JIT one by default, and optdec.
+          # It is measured with each, and with its faster decoding of maps, so that it is compared at its best.
+          - name: decode, sonic optdec
+            run: SONIC_USE_OPTDEC=1 make bench-compare-decode
+          - name: decode, sonic fastmap
+            run: SONIC_USE_FASTMAP=1 make bench-compare-decode
+          # A program which decodes JSON has a live heap of its own, which sets the goal of the GC for every
+          # library alike ( see benchmarks/live_heap_test.go ): it is measured with one too, as a real program runs.
+          - name: decode, live heap
+            run: BENCH_LIVE_HEAP_MB=64 make bench-compare-decode
+          - name: decode, live heap, sonic optdec
+            run: BENCH_LIVE_HEAP_MB=64 SONIC_USE_OPTDEC=1 make bench-compare-decode
+          - name: profile encode
+            run: make bench-profile-encode
+          - name: candidates of the optimizations
+            run: make bench-variants
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+      - name: setup Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.3'
+          cache-dependency-path: |
+            go.sum
+            benchmarks/go.sum
+      - name: ${{ matrix.name }}
+        run: ${{ matrix.run }}
+
+  bench-compare-jsontext:
+    # It never fails by the result: it exists to read how github.com/goccy/go-json/jsontext compares with
+    # encoding/json/jsontext, which it replaces.
+    name: Compare with encoding/json/jsontext
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+      - name: setup Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.3'
+          cache-dependency-path: |
+            go.sum
+            benchmarks/go.sum
+      - name: compare
+        run: make bench-compare-jsontext
+
+  coverage:
+    name: Coverage
+    runs-on: ubuntu-latest
+    # octocov comments on the pull request ( see .octocov.yml ), and reads the report of the base branch from the
+    # artifacts of the runs on it.
+    permissions:
+      contents: read
+      pull-requests: write
+      actions: read
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+      - name: setup Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: '1.27.3'
+      - name: measure coverage
+        run: make cover
+      - name: report coverage
+        uses: k1LoW/octocov-action@a167dc0dee441b7ffc45e1b862ab55ec0d87f278 # v1.5.2
