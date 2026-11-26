@@ -1,0 +1,351 @@
+diff --git a/encode.go b/encode.go
+index ac83f95..3b9f43c 100644
+--- a/encode.go
++++ b/encode.go
+@@ -109,7 +109,6 @@ func (e *Encoder) SetIndent(prefix, indent string) {
+ 
+ func marshalContext(ctx context.Context, v any, optFuncs ...EncodeOptionFunc) ([]byte, error) {
+ 	rctx := encoder.TakeRuntimeContext()
+-	rctx.Option.Flag = 0
+ 	rctx.Option.Flag = encoder.HTMLEscapeOption | encoder.NormalizeUTF8Option | encoder.ContextOption
+ 	rctx.Option.Context = ctx
+ 	for _, optFunc := range optFuncs {
+@@ -137,8 +136,7 @@ func marshalContext(ctx context.Context, v any, optFuncs ...EncodeOptionFunc) ([
+ func marshal(v any, optFuncs ...EncodeOptionFunc) ([]byte, error) {
+ 	ctx := encoder.TakeRuntimeContext()
+ 
+-	ctx.Option.Flag = 0
+-	ctx.Option.Flag |= (encoder.HTMLEscapeOption | encoder.NormalizeUTF8Option)
++	ctx.Option.Flag = encoder.HTMLEscapeOption | encoder.NormalizeUTF8Option
+ 	for _, optFunc := range optFuncs {
+ 		optFunc(ctx.Option)
+ 	}
+diff --git a/escape_sweep_test.go b/escape_sweep_test.go
+new file mode 100644
+index 0000000..02d4918
+--- /dev/null
++++ b/escape_sweep_test.go
+@@ -0,0 +1,137 @@
++package json_test
++
++import (
++	"encoding/json"
++	"fmt"
++	"strings"
++	"testing"
++
++	goccy "github.com/goccy/go-json"
++)
++
++// TestEscapeSweepByteIdentity compares goccy v1 Marshal with encoding/json for strings of every
++// length 0..96 with a special byte planted at every position: the one-pass word chain of
++// AppendQuoted must cover every byte of the string at every length.
++func TestEscapeSweepByteIdentity(t *testing.T) {
++	type holder struct {
++		S string `json:"s"`
++	}
++	specials := []struct {
++		name string
++		make func(i, n int) string
++	}{
++		{"clean", func(i, n int) string {
++			b := make([]byte, n)
++			for j := range b {
++				b[j] = byte('a' + j%26)
++			}
++			return string(b)
++		}},
++		{"lt", func(i, n int) string {
++			b := []byte(strings.Repeat("x", n))
++			if i < n {
++				b[i] = '<'
++			}
++			return string(b)
++		}},
++		{"gt", func(i, n int) string {
++			b := []byte(strings.Repeat("x", n))
++			if i < n {
++				b[i] = '>'
++			}
++			return string(b)
++		}},
++		{"amp", func(i, n int) string {
++			b := []byte(strings.Repeat("x", n))
++			if i < n {
++				b[i] = '&'
++			}
++			return string(b)
++		}},
++		{"quote", func(i, n int) string {
++			b := []byte(strings.Repeat("x", n))
++			if i < n {
++				b[i] = '"'
++			}
++			return string(b)
++		}},
++		{"backslash", func(i, n int) string {
++			b := []byte(strings.Repeat("x", n))
++			if i < n {
++				b[i] = '\\'
++			}
++			return string(b)
++		}},
++		{"control", func(i, n int) string {
++			b := []byte(strings.Repeat("x", n))
++			if i < n {
++				b[i] = 0x01
++			}
++			return string(b)
++		}},
++		{"del", func(i, n int) string {
++			b := []byte(strings.Repeat("x", n))
++			if i < n {
++				b[i] = 0x7f
++			}
++			return string(b)
++		}},
++		{"nbsp", func(i, n int) string { // U+00A0 as UTF-8, 2 bytes: plant at every byte offset
++			b := []byte(strings.Repeat("x", n))
++			if i+1 < n {
++				b[i], b[i+1] = 0xc2, 0xa0
++			}
++			return string(b)
++		}},
++		{"u2028", func(i, n int) string { // line separator, 3 bytes, must be normalized
++			b := []byte(strings.Repeat("x", n))
++			if i+2 < n {
++				b[i], b[i+1], b[i+2] = 0xe2, 0x80, 0xa8
++			}
++			return string(b)
++		}},
++		{"emoji", func(i, n int) string { // 4-byte UTF-8
++			b := []byte(strings.Repeat("x", n))
++			if i+3 < n {
++				b[i], b[i+1], b[i+2], b[i+3] = 0xf0, 0x9f, 0x98, 0x80
++			}
++			return string(b)
++		}},
++		{"invalid", func(i, n int) string { // lone continuation byte: invalid UTF-8
++			b := []byte(strings.Repeat("x", n))
++			if i < n {
++				b[i] = 0x80
++			}
++			return string(b)
++		}},
++		{"two", func(i, n int) string { // two specials, second at the end
++			b := []byte(strings.Repeat("x", n))
++			if i < n {
++				b[i] = '<'
++			}
++			if n >= 2 {
++				b[n-1] = '&'
++			}
++			return string(b)
++		}},
++	}
++	for _, sp := range specials {
++		for n := 0; n <= 96; n++ {
++			for i := 0; i <= n; i++ {
++				s := sp.make(i, n)
++				want, err := json.Marshal(holder{S: s})
++				if err != nil {
++					t.Fatalf("%s n=%d i=%d: encoding/json: %v", sp.name, n, i, err)
++				}
++				got, err := goccy.Marshal(holder{S: s})
++				if err != nil {
++					t.Fatalf("%s n=%d i=%d: go-json: %v", sp.name, n, i, err)
++				}
++				if string(got) != string(want) {
++					t.Fatalf("%s n=%d i=%d:\n got: %s\nwant: %s\n string: %q",
++						sp.name, n, i, fmt.Sprintf("%q", got), fmt.Sprintf("%q", want), s)
++				}
++			}
++		}
++	}
++}
+diff --git a/internal/encoder/int.go b/internal/encoder/int.go
+index 8926f87..ad940ff 100644
+--- a/internal/encoder/int.go
++++ b/internal/encoder/int.go
+@@ -35,20 +35,27 @@ func numMask(numBitSize uint8) uint64 {
+ }
+ 
+ func AppendInt(_ *RuntimeContext, out []byte, p unsafe.Pointer, code *Opcode) []byte {
++	// The 64-bit case is first, not in the switch: it is the width of an int on amd64 and arm64,
++	// and the branch is predicted, while the switch is a jump table or a search on every call.
+ 	var u64 uint64
+-	switch code.NumBitSize {
+-	case 8:
+-		u64 = uint64(*(*uint8)(p))
+-	case 16:
+-		u64 = uint64(*(*uint16)(p))
+-	case 32:
+-		u64 = uint64(*(*uint32)(p))
+-	case 64:
++	mask := ^uint64(0)
++	negative := false
++	if code.NumBitSize == 64 {
+ 		u64 = *(*uint64)(p)
++		negative = u64>>63 == 1
++	} else {
++		switch code.NumBitSize {
++		case 8:
++			u64 = uint64(*(*uint8)(p))
++		case 16:
++			u64 = uint64(*(*uint16)(p))
++		case 32:
++			u64 = uint64(*(*uint32)(p))
++		}
++		mask = numMask(code.NumBitSize)
++		negative = (u64>>(code.NumBitSize-1))&1 == 1
+ 	}
+-	mask := numMask(code.NumBitSize)
+ 	n := u64 & mask
+-	negative := (u64>>(code.NumBitSize-1))&1 == 1
+ 	if negative {
+ 		n = -n & mask
+ 	} else if n < 10 {
+@@ -63,18 +70,22 @@ func AppendInt(_ *RuntimeContext, out []byte, p unsafe.Pointer, code *Opcode) []
+ }
+ 
+ func AppendUint(_ *RuntimeContext, out []byte, p unsafe.Pointer, code *Opcode) []byte {
++	// The 64-bit case is first, not in the switch ( see AppendInt ).
+ 	var u64 uint64
+-	switch code.NumBitSize {
+-	case 8:
+-		u64 = uint64(*(*uint8)(p))
+-	case 16:
+-		u64 = uint64(*(*uint16)(p))
+-	case 32:
+-		u64 = uint64(*(*uint32)(p))
+-	case 64:
++	if code.NumBitSize == 64 {
+ 		u64 = *(*uint64)(p)
++	} else {
++		switch code.NumBitSize {
++		case 8:
++			u64 = uint64(*(*uint8)(p))
++		case 16:
++			u64 = uint64(*(*uint16)(p))
++		case 32:
++			u64 = uint64(*(*uint32)(p))
++		}
++		u64 &= numMask(code.NumBitSize)
+ 	}
+-	n := u64 & numMask(code.NumBitSize)
++	n := u64
+ 	if n < 10 {
+ 		return append(out, byte(n+'0'))
+ 	} else if n < 100 {
+diff --git a/internal/encoder/opcode.go b/internal/encoder/opcode.go
+index 7ab5e01..490e9ce 100644
+--- a/internal/encoder/opcode.go
++++ b/internal/encoder/opcode.go
+@@ -52,24 +52,26 @@ type Opcode struct {
+ 	Idx        uint32    // offset to access ptr
+ 	Next       *Opcode   // next opcode
+ 	End        *Opcode   // array/slice/struct/map end
+-	NextField  *Opcode   // next struct field
++	KeyChunk   *[KeyChunkSize]byte // the key and the padding after it, which the VM copies as a chunk: in the
++	// first cache line of the opcode, with the fields the VM reads for a struct field, while NextField, below,
++	// is only for linking the codes when they are compiled.
+ 	Key        string    // struct field key
+ 	Offset     uint32    // offset size from struct header
+ 	PtrNum     uint8     // pointer number: e.g. double pointer is 2.
+ 	NumBitSize uint8
+ 	Flags      OpFlags
+ 
+-	Type       unsafe.Pointer      // pointer to the type descriptor of go type
+-	Jmp        *CompiledCode       // for recursive call
+-	Marshaler  *MarshalerCall      // the method of the marshaler, for MarshalJSON and MarshalText
+-	FieldQuery *FieldQuery         // field query for Interface / MarshalJSON / MarshalText
+-	ElemIdx    uint32              // offset to access array/slice elem
+-	Length     uint32              // offset to access slice length or array length
+-	Indent     uint32              // indent number
+-	Size       uint32              // array/slice elem size
+-	DisplayIdx uint32              // opcode index
+-	KeyChunk   *[KeyChunkSize]byte // the key and the padding after it, which the VM copies as a chunk
+-	Map        *MapLayout          // how the entries of the map are read, for the opcode of a map
++	Type       unsafe.Pointer // pointer to the type descriptor of go type
++	Jmp        *CompiledCode  // for recursive call
++	Marshaler  *MarshalerCall // the method of the marshaler, for MarshalJSON and MarshalText
++	FieldQuery *FieldQuery    // field query for Interface / MarshalJSON / MarshalText
++	ElemIdx    uint32         // offset to access array/slice elem
++	Length     uint32         // offset to access slice length or array length
++	Indent     uint32         // indent number
++	Size       uint32         // array/slice elem size
++	DisplayIdx uint32         // opcode index
++	NextField  *Opcode        // next struct field: for linking the codes when they are compiled
++	Map        *MapLayout     // how the entries of the map are read, for the opcode of a map
+ }
+ 
+ func (c *Opcode) Validate() error {
+diff --git a/internal/jsonstring/quote.go b/internal/jsonstring/quote.go
+index db6f7a7..cc97d8e 100644
+--- a/internal/jsonstring/quote.go
++++ b/internal/jsonstring/quote.go
+@@ -407,8 +407,8 @@ func AppendQuoted(escape *Escaper, buf []byte, s string) ([]byte, bool) {
+ 			return buf, true
+ 		}
+ 	} else if l := len(buf); n <= maxOnePassLength && cap(buf)-l >= n+2 {
+-		// the first and the last word and the ones between them, which overlap: 8 to maxOnePassLength bytes, 31
+-		// at most, are 2 to 4 words. A buffer without the capacity is grown below.
++		// the first and the last word and the ones between them, which overlap: 8 to maxOnePassLength bytes,
++		// 63 at most on amd64, are 2 to 8 words. A buffer without the capacity is grown below.
+ 		dst := unsafe.Add(unsafe.Pointer(unsafe.SliceData(buf)), l+1)
+ 		first, last := *(*uint64)(src), *(*uint64)(unsafe.Add(src, n-8))
+ 		*(*uint64)(dst) = first
+@@ -418,11 +418,31 @@ func AppendQuoted(escape *Escaper, buf []byte, s string) ([]byte, bool) {
+ 			w := *(*uint64)(unsafe.Add(src, 8))
+ 			*(*uint64)(unsafe.Add(dst, 8)) = w
+ 			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
+-			if n > 24 {
+-				w := *(*uint64)(unsafe.Add(src, 16))
+-				*(*uint64)(unsafe.Add(dst, 16)) = w
+-				mask |= looseCommonMask(w) | escape.looseCharsMask(w)
+-			}
++		}
++		if n > 24 {
++			w := *(*uint64)(unsafe.Add(src, 16))
++			*(*uint64)(unsafe.Add(dst, 16)) = w
++			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
++		}
++		if n > 32 {
++			w := *(*uint64)(unsafe.Add(src, 24))
++			*(*uint64)(unsafe.Add(dst, 24)) = w
++			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
++		}
++		if n > 40 {
++			w := *(*uint64)(unsafe.Add(src, 32))
++			*(*uint64)(unsafe.Add(dst, 32)) = w
++			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
++		}
++		if n > 48 {
++			w := *(*uint64)(unsafe.Add(src, 40))
++			*(*uint64)(unsafe.Add(dst, 40)) = w
++			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
++		}
++		if n > 56 {
++			w := *(*uint64)(unsafe.Add(src, 48))
++			*(*uint64)(unsafe.Add(dst, 48)) = w
++			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
+ 		}
+ 		if mask&msb != 0 && (escape.high != 0 || escape.hasExactEscape(src, n)) {
+ 			// a byte which is not ASCII is to be looked at only if UTF-8 is normalized.
+diff --git a/internal/jsonstring/scan_amd64.go b/internal/jsonstring/scan_amd64.go
+index 3352fb5..79f7774 100644
+--- a/internal/jsonstring/scan_amd64.go
++++ b/internal/jsonstring/scan_amd64.go
+@@ -59,8 +59,10 @@ func appendEscapedSIMD(buf []byte, s string, tables *nibbleTables, normalizeUTF8
+ const minSIMDScanLength = 32
+ 
+ // maxOnePassLength is the length of the longest string which AppendString looks at and copies in one pass:
+-// a longer one is looked at by SIMD, which then costs less, and copied after.
+-const maxOnePassLength = minSIMDScanLength - 1
++// a longer one is looked at by SIMD, which then costs less, and copied after. It is 47: the words of one pass
++// cost about what the SIMD scan and the copy after it do up to about 48 bytes, and less for the shorter
++// strings which are the most common, while a longer one is scanned and copied by SIMD faster.
++const maxOnePassLength = 47
+ 
+ // scanBytesSIMD is whether a byte of the n bytes at src is in the tables, by SIMD. The second result is false
+ // if the CPU doesn't support it or n is small, and the bytes are not looked at. It is inlined, so that

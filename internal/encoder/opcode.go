@@ -52,24 +52,26 @@ type Opcode struct {
 	Idx        uint32    // offset to access ptr
 	Next       *Opcode   // next opcode
 	End        *Opcode   // array/slice/struct/map end
-	NextField  *Opcode   // next struct field
+	KeyChunk   *[KeyChunkSize]byte // the key and the padding after it, which the VM copies as a chunk: in the
+	// first cache line of the opcode, with the fields the VM reads for a struct field, while NextField, below,
+	// is only for linking the codes when they are compiled.
 	Key        string    // struct field key
 	Offset     uint32    // offset size from struct header
 	PtrNum     uint8     // pointer number: e.g. double pointer is 2.
 	NumBitSize uint8
 	Flags      OpFlags
 
-	Type       unsafe.Pointer      // pointer to the type descriptor of go type
-	Jmp        *CompiledCode       // for recursive call
-	Marshaler  *MarshalerCall      // the method of the marshaler, for MarshalJSON and MarshalText
-	FieldQuery *FieldQuery         // field query for Interface / MarshalJSON / MarshalText
-	ElemIdx    uint32              // offset to access array/slice elem
-	Length     uint32              // offset to access slice length or array length
-	Indent     uint32              // indent number
-	Size       uint32              // array/slice elem size
-	DisplayIdx uint32              // opcode index
-	KeyChunk   *[KeyChunkSize]byte // the key and the padding after it, which the VM copies as a chunk
-	Map        *MapLayout          // how the entries of the map are read, for the opcode of a map
+	Type       unsafe.Pointer // pointer to the type descriptor of go type
+	Jmp        *CompiledCode  // for recursive call
+	Marshaler  *MarshalerCall // the method of the marshaler, for MarshalJSON and MarshalText
+	FieldQuery *FieldQuery    // field query for Interface / MarshalJSON / MarshalText
+	ElemIdx    uint32         // offset to access array/slice elem
+	Length     uint32         // offset to access slice length or array length
+	Indent     uint32         // indent number
+	Size       uint32         // array/slice elem size
+	DisplayIdx uint32         // opcode index
+	NextField  *Opcode        // next struct field: for linking the codes when they are compiled
+	Map        *MapLayout     // how the entries of the map are read, for the opcode of a map
 }
 
 func (c *Opcode) Validate() error {

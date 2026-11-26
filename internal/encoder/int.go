@@ -35,20 +35,27 @@ func numMask(numBitSize uint8) uint64 {
 }
 
 func AppendInt(_ *RuntimeContext, out []byte, p unsafe.Pointer, code *Opcode) []byte {
+	// The 64-bit case is first, not in the switch: it is the width of an int on amd64 and arm64,
+	// and the branch is predicted, while the switch is a jump table or a search on every call.
 	var u64 uint64
-	switch code.NumBitSize {
-	case 8:
-		u64 = uint64(*(*uint8)(p))
-	case 16:
-		u64 = uint64(*(*uint16)(p))
-	case 32:
-		u64 = uint64(*(*uint32)(p))
-	case 64:
+	mask := ^uint64(0)
+	negative := false
+	if code.NumBitSize == 64 {
 		u64 = *(*uint64)(p)
+		negative = u64>>63 == 1
+	} else {
+		switch code.NumBitSize {
+		case 8:
+			u64 = uint64(*(*uint8)(p))
+		case 16:
+			u64 = uint64(*(*uint16)(p))
+		case 32:
+			u64 = uint64(*(*uint32)(p))
+		}
+		mask = numMask(code.NumBitSize)
+		negative = (u64>>(code.NumBitSize-1))&1 == 1
 	}
-	mask := numMask(code.NumBitSize)
 	n := u64 & mask
-	negative := (u64>>(code.NumBitSize-1))&1 == 1
 	if negative {
 		n = -n & mask
 	} else if n < 10 {
@@ -63,18 +70,22 @@ func AppendInt(_ *RuntimeContext, out []byte, p unsafe.Pointer, code *Opcode) []
 }
 
 func AppendUint(_ *RuntimeContext, out []byte, p unsafe.Pointer, code *Opcode) []byte {
+	// The 64-bit case is first, not in the switch ( see AppendInt ).
 	var u64 uint64
-	switch code.NumBitSize {
-	case 8:
-		u64 = uint64(*(*uint8)(p))
-	case 16:
-		u64 = uint64(*(*uint16)(p))
-	case 32:
-		u64 = uint64(*(*uint32)(p))
-	case 64:
+	if code.NumBitSize == 64 {
 		u64 = *(*uint64)(p)
+	} else {
+		switch code.NumBitSize {
+		case 8:
+			u64 = uint64(*(*uint8)(p))
+		case 16:
+			u64 = uint64(*(*uint16)(p))
+		case 32:
+			u64 = uint64(*(*uint32)(p))
+		}
+		u64 &= numMask(code.NumBitSize)
 	}
-	n := u64 & numMask(code.NumBitSize)
+	n := u64
 	if n < 10 {
 		return append(out, byte(n+'0'))
 	} else if n < 100 {

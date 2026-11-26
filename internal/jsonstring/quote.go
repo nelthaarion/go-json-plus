@@ -407,8 +407,8 @@ func AppendQuoted(escape *Escaper, buf []byte, s string) ([]byte, bool) {
 			return buf, true
 		}
 	} else if l := len(buf); n <= maxOnePassLength && cap(buf)-l >= n+2 {
-		// the first and the last word and the ones between them, which overlap: 8 to maxOnePassLength bytes, 31
-		// at most, are 2 to 4 words. A buffer without the capacity is grown below.
+		// the first and the last word and the ones between them, which overlap: 8 to maxOnePassLength bytes,
+		// 63 at most on amd64, are 2 to 8 words. A buffer without the capacity is grown below.
 		dst := unsafe.Add(unsafe.Pointer(unsafe.SliceData(buf)), l+1)
 		first, last := *(*uint64)(src), *(*uint64)(unsafe.Add(src, n-8))
 		*(*uint64)(dst) = first
@@ -418,11 +418,31 @@ func AppendQuoted(escape *Escaper, buf []byte, s string) ([]byte, bool) {
 			w := *(*uint64)(unsafe.Add(src, 8))
 			*(*uint64)(unsafe.Add(dst, 8)) = w
 			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
-			if n > 24 {
-				w := *(*uint64)(unsafe.Add(src, 16))
-				*(*uint64)(unsafe.Add(dst, 16)) = w
-				mask |= looseCommonMask(w) | escape.looseCharsMask(w)
-			}
+		}
+		if n > 24 {
+			w := *(*uint64)(unsafe.Add(src, 16))
+			*(*uint64)(unsafe.Add(dst, 16)) = w
+			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
+		}
+		if n > 32 {
+			w := *(*uint64)(unsafe.Add(src, 24))
+			*(*uint64)(unsafe.Add(dst, 24)) = w
+			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
+		}
+		if n > 40 {
+			w := *(*uint64)(unsafe.Add(src, 32))
+			*(*uint64)(unsafe.Add(dst, 32)) = w
+			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
+		}
+		if n > 48 {
+			w := *(*uint64)(unsafe.Add(src, 40))
+			*(*uint64)(unsafe.Add(dst, 40)) = w
+			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
+		}
+		if n > 56 {
+			w := *(*uint64)(unsafe.Add(src, 48))
+			*(*uint64)(unsafe.Add(dst, 48)) = w
+			mask |= looseCommonMask(w) | escape.looseCharsMask(w)
 		}
 		if mask&msb != 0 && (escape.high != 0 || escape.hasExactEscape(src, n)) {
 			// a byte which is not ASCII is to be looked at only if UTF-8 is normalized.

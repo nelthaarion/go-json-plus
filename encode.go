@@ -109,7 +109,6 @@ func (e *Encoder) SetIndent(prefix, indent string) {
 
 func marshalContext(ctx context.Context, v any, optFuncs ...EncodeOptionFunc) ([]byte, error) {
 	rctx := encoder.TakeRuntimeContext()
-	rctx.Option.Flag = 0
 	rctx.Option.Flag = encoder.HTMLEscapeOption | encoder.NormalizeUTF8Option | encoder.ContextOption
 	rctx.Option.Context = ctx
 	for _, optFunc := range optFuncs {
@@ -137,8 +136,7 @@ func marshalContext(ctx context.Context, v any, optFuncs ...EncodeOptionFunc) ([
 func marshal(v any, optFuncs ...EncodeOptionFunc) ([]byte, error) {
 	ctx := encoder.TakeRuntimeContext()
 
-	ctx.Option.Flag = 0
-	ctx.Option.Flag |= (encoder.HTMLEscapeOption | encoder.NormalizeUTF8Option)
+	ctx.Option.Flag = encoder.HTMLEscapeOption | encoder.NormalizeUTF8Option
 	for _, optFunc := range optFuncs {
 		optFunc(ctx.Option)
 	}

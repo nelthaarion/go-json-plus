@@ -59,8 +59,10 @@ func appendEscapedSIMD(buf []byte, s string, tables *nibbleTables, normalizeUTF8
 const minSIMDScanLength = 32
 
 // maxOnePassLength is the length of the longest string which AppendString looks at and copies in one pass:
-// a longer one is looked at by SIMD, which then costs less, and copied after.
-const maxOnePassLength = minSIMDScanLength - 1
+// a longer one is looked at by SIMD, which then costs less, and copied after. It is 47: the words of one pass
+// cost about what the SIMD scan and the copy after it do up to about 48 bytes, and less for the shorter
+// strings which are the most common, while a longer one is scanned and copied by SIMD faster.
+const maxOnePassLength = 47
 
 // scanBytesSIMD is whether a byte of the n bytes at src is in the tables, by SIMD. The second result is false
 // if the CPU doesn't support it or n is small, and the bytes are not looked at. It is inlined, so that
